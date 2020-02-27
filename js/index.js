@@ -1,13 +1,20 @@
 const btn = document.querySelector('.btnFile');
 const inputBtn = document.querySelector('input');
 const playerSelect = document.getElementById('playerSelect');
+const results = document.querySelector('.results');
+
 let gameFile = "";
 let playByPlayObj = [];
 
 btn.addEventListener('click', () => {
-    // get all events for player selected and display in grid
+    // get all events for player selected and display
     btn.style.display = "none";
-    
+
+    // get player_id based on player choice
+    results.style.display = 'block';
+
+    let player_name = document.querySelector('.results .player_name');
+    player_name.textContent = playerSelect.value;
 });
 
 function inputBtnFunction() {
@@ -48,7 +55,8 @@ function getPlayerNames() {
     names = [...new Set(names)].sort();
 
     for(let i=0, max = names.length; i < max; i++) {
-        playerSelect.innerHTML += "<option value=" + names[i] + ">" + names[i] + "</option>";
+        playerSelect.innerHTML += "<option value='" + names[i] + "'>" + names[i] + "</option>";
+        console.log(names[i]);
     }
 }
 
