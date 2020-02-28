@@ -31,7 +31,6 @@ let searchForPlayerByID = 0;
 
 btn.addEventListener('click', () => {
     // get all events for player selected and display
-    btn.style.display = "none";
 
     // get player_id based on player choice
     results.style.display = 'block';
@@ -45,7 +44,7 @@ btn.addEventListener('click', () => {
         if(playByPlayObj[i].category === "play") {
             if(playByPlayObj[i].play_player_id === searchForPlayerByID) {
                 console.log(playByPlayObj[i].play_result);
-                if(playByPlayObj[i].play_result !== "NP" || playByPlayObj[i].play_result.substring(0,2) !== "SB" || playByPlayObj[i].play_result.substring(0,2) !== "WP") {
+                if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "WP") {
                     // add PA
                     stats.pa++;
 
@@ -53,7 +52,7 @@ btn.addEventListener('click', () => {
                         stats.k++;
                         stats.ab++;
                     }
-                    else if(playByPlayObj[i].play_result.charAt(0) === "W") {
+                    else if(playByPlayObj[i].play_result.charAt(0) === "W" || playByPlayObj[i].play_result.substring(0,2) === "IW") {
                         stats.bb++;
                     }
                     else if(playByPlayObj[i].play_result.substring(0,2) === "S9") {
@@ -86,7 +85,7 @@ btn.addEventListener('click', () => {
                         stats.h++;
                         stats.ab++;
                     }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D7") {
+                    else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6") {
                         stats.b2_lf++;
                         stats.h++;
                         stats.ab++;
