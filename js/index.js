@@ -22,12 +22,25 @@ let stats = {
     hr_lf: 0,
     bb: 0,
     k: 0,
-    hbp: 0
+    hbp: 0,
+    g1: 0,
+    g2: 0,
+    g3: 0,
+    g4: 0,
+    g5: 0,
+    g6: 0,
+    f7: 0,
+    f8: 0,
+    f9: 0,
+    pop: 0,
+    fo: 0,
+    lo: 0
 }
 
 let gameFile = "";
 let playByPlayObj = [];
 let searchForPlayerByID = 0;
+let count = 0;
 
 btn.addEventListener('click', () => {
     // get all events for player selected and display
@@ -43,10 +56,11 @@ btn.addEventListener('click', () => {
     for(let i = 0, max = playByPlayObj.length; i < max; i++) {
         if(playByPlayObj[i].category === "play") {
             if(playByPlayObj[i].play_player_id === searchForPlayerByID) {
-                console.log(playByPlayObj[i].play_result);
-                if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "WP") {
+                if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "CS" && playByPlayObj[i].play_result.substring(0,2) !== "WP" && playByPlayObj[i].play_result.substring(0,2) !== "BK" &&  playByPlayObj[i].play_result.substring(0,2) !== "PO" &&  playByPlayObj[i].play_result.substring(0,2) !== "DI" &&  playByPlayObj[i].play_result.substring(0,4) !== "C/E2" &&  playByPlayObj[i].play_result.substring(0,2) !== "PB" && playByPlayObj[i].play_result.substring(0,2) !== "OA" && playByPlayObj[i].play_result.substring(0,4) !== "POCS" && playByPlayObj[i].play_result.substring(0,4) !== "FLE" && playByPlayObj[i].play_result.substring(0,4) !== "C/E3") {
                     // add PA
                     stats.pa++;
+                    count++;
+                    console.log(count + ": " + playByPlayObj[i].play_result);
 
                     if(playByPlayObj[i].play_result.charAt(0) === "K") {
                         stats.k++;
@@ -85,7 +99,7 @@ btn.addEventListener('click', () => {
                         stats.h++;
                         stats.ab++;
                     }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6") {
+                    else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
                         stats.b2_lf++;
                         stats.h++;
                         stats.ab++;
@@ -110,7 +124,7 @@ btn.addEventListener('click', () => {
                         stats.h++;
                         stats.ab++;
                     }
-                    else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8") {
+                    else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8" || playByPlayObj[i].play_result.substring(0,5) === "HR8/8") {
                         stats.hr_cf++;
                         stats.h++;
                         stats.ab++;
@@ -122,6 +136,51 @@ btn.addEventListener('click', () => {
                     }
                     else if(playByPlayObj[i].play_result.substring(0,2) === "HP") {
                         stats.hbp++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/G" || playByPlayObj[i].play_result.substring(0,2) === "12" || playByPlayObj[i].play_result.substring(0,2) === "13" || playByPlayObj[i].play_result.substring(0,2) === "E1" || playByPlayObj[i].play_result.substring(0,5) === "FC1/G" || playByPlayObj[i].play_result.substring(0,2) === "14" || playByPlayObj[i].play_result.substring(0,2) === "16" || playByPlayObj[i].play_result.substring(0,4) === "1(B)") {
+                        stats.g1++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "2/G" || playByPlayObj[i].play_result.substring(0,2) === "23" || playByPlayObj[i].play_result.substring(0,2) === "E2" || playByPlayObj[i].play_result.substring(0,5) === "FC2/G") {
+                        stats.g2++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "3/G" || playByPlayObj[i].play_result.substring(0,2) === "E3" || playByPlayObj[i].play_result.substring(0,3) === "FC3" || playByPlayObj[i].play_result.substring(0,2) === "31"  || playByPlayObj[i].play_result.substring(0,2) === "36" || playByPlayObj[i].play_result.substring(0,2) === "32" || playByPlayObj[i].play_result.substring(0,4) === "3(B)") {
+                        stats.g3++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "4/G" || playByPlayObj[i].play_result.substring(0,2) === "43" || playByPlayObj[i].play_result.substring(0,2) === "45" || playByPlayObj[i].play_result.substring(0,2) === "E4" || playByPlayObj[i].play_result.substring(0,3) === "FC4" || playByPlayObj[i].play_result.substring(0,4) === "4(1)" || playByPlayObj[i].play_result.substring(0,2) === "46" || playByPlayObj[i].play_result.substring(0,2) === "41" || playByPlayObj[i].play_result.substring(0,4) === "4(B)") {
+                        stats.g4++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "5/G" || playByPlayObj[i].play_result.substring(0,2) === "53" || playByPlayObj[i].play_result.substring(0,2) === "54" || playByPlayObj[i].play_result.substring(0,2) === "E5" || playByPlayObj[i].play_result.substring(0,3) === "FC5" || playByPlayObj[i].play_result.substring(0,4) === "5(2)" || playByPlayObj[i].play_result.substring(0,2) === "56" || playByPlayObj[i].play_result.substring(0,2) === "52" || playByPlayObj[i].play_result.substring(0,4) === "5(B)") {
+                        stats.g5++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "6/G" || playByPlayObj[i].play_result.substring(0,2) === "63" || playByPlayObj[i].play_result.substring(0,2) === "64" || playByPlayObj[i].play_result.substring(0,2) === "65" || playByPlayObj[i].play_result.substring(0,2) === "E6" || playByPlayObj[i].play_result.substring(0,3) === "FC6" || playByPlayObj[i].play_result.substring(0,4) === "6(1)" || playByPlayObj[i].play_result.substring(0,4) === "6(B)") {
+                        stats.g6++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
+                        stats.f7++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
+                        stats.f8++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
+                        stats.f9++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
+                        stats.pop++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
+                        stats.lo++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
+                        stats.lo++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
+                        stats.lo++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
+                        stats.lo++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
+                        stats.lo++;
                     }
                 }
             }
@@ -150,7 +209,17 @@ btn.addEventListener('click', () => {
     console.log("HBP: " + stats.hbp);
     console.log("BB: " + stats.bb);
     console.log("K: " + stats.k);
-    
+    console.log("G1: " + stats.g1);
+    console.log("G2: " + stats.g2);
+    console.log("G3: " + stats.g3);
+    console.log("G4: " + stats.g4);
+    console.log("G5: " + stats.g5);
+    console.log("G6: " + stats.g6);
+    console.log("F7: " + stats.f7);
+    console.log("F8: " + stats.f8);
+    console.log("F9: " + stats.f9);
+    console.log("POP: " + stats.pop);
+    console.log("LO: " + stats.lo);
 });
 
 function inputBtnFunction() {
