@@ -14,6 +14,7 @@ let stats = {
     b2_rf: 0,
     b2_cf: 0,
     b2_lf: 0,
+    b2_dgr: 0,
     b3_rf: 0,
     b3_cf: 0,
     b3_lf: 0,
@@ -34,7 +35,8 @@ let stats = {
     f9: 0,
     pop: 0,
     fo: 0,
-    lo: 0
+    lo: 0,
+    gdp: 0
 }
 
 let gameFile = "";
@@ -94,13 +96,18 @@ btn.addEventListener('click', () => {
                         stats.h++;
                         stats.ab++;
                     }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "DGR") {
+                    else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "D/L") {
                         stats.b2_cf++;
                         stats.h++;
                         stats.ab++;
                     }
                     else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
                         stats.b2_lf++;
+                        stats.h++;
+                        stats.ab++;
+                    }
+                    else if(playByPlayObj[i].play_result.substring(0,3) === "DGR") {
+                        stats.b2_dgr++;
                         stats.h++;
                         stats.ab++;
                     }
@@ -200,6 +207,7 @@ btn.addEventListener('click', () => {
     console.log("2B-LF: " + stats.b2_lf);
     console.log("2B-CF: " + stats.b2_cf);
     console.log("2B-RF: " + stats.b2_rf);
+    console.log("2B-DGR: " + stats.b2_dgr);
     console.log("3B-LF: " + stats.b3_lf);
     console.log("3B-CF: " + stats.b3_cf);
     console.log("3B-RF: " + stats.b3_rf);
@@ -220,6 +228,7 @@ btn.addEventListener('click', () => {
     console.log("F9: " + stats.f9);
     console.log("POP: " + stats.pop);
     console.log("LO: " + stats.lo);
+    console.log("GDP: " + stats.gdp);
 });
 
 function inputBtnFunction() {
