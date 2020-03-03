@@ -229,63 +229,63 @@ btn.addEventListener('click', () => {
 
     // create singles results
     for(let i = 0; i < 4; i++) {
-        do {
+        if(singles[i] > 0) {
             if(new_values[5] > 0 && new_values[5] <= singles[i]) {
                 singles_results[5] = single_types[i];
                 new_values[5] = 0;
                 singles[i] -= 6;
             }
-            else if(new_values[4] > 0 && new_values[4] <= singles[i]) {
+            if(new_values[4] > 0 && new_values[4] <= singles[i]) {
                 singles_results[4] = single_types[i];
                 new_values[4] = 0;
                 singles[i] -= 5;
             }
-            else if(new_values[6] > 0 && new_values[6] <= singles[i]) {
+            if(new_values[6] > 0 && new_values[6] <= singles[i]) {
                 singles_results[6] = single_types[i];
                 new_values[6] = 0;
                 singles[i] -= 5;
             }
-            else if(new_values[3] > 0 && new_values[3] <= singles[i]) {
+            if(new_values[3] > 0 && new_values[3] <= singles[i]) {
                 singles_results[3] = single_types[i];
                 new_values[3] = 0;
                 singles[i] -= 4;
             }
-            else if(new_values[7] > 0 && new_values[7] <= singles[i]) {
+            if(new_values[7] > 0 && new_values[7] <= singles[i]) {
                 singles_results[7] = single_types[i];
                 new_values[7] = 0;
                 singles[i] -= 4;
             }
-            else if(new_values[2] > 0 && new_values[2] <= singles[i]) {
+            if(new_values[2] > 0 && new_values[2] <= singles[i]) {
                 singles_results[2] = single_types[i];
                 new_values[2] = 0;
                 singles[i] -= 3;
             }
-            else if(new_values[8] > 0 && new_values[8] <= singles[i]) {
+            if(new_values[8] > 0 && new_values[8] <= singles[i]) {
                 singles_results[8] = single_types[i];
                 new_values[8] = 0;
                 singles[i] -= 3;
             }
-            else if(new_values[1] > 0 && new_values[1] <= singles[i]) {
+            if(new_values[1] > 0 && new_values[1] <= singles[i]) {
                 singles_results[1] = single_types[i];
                 new_values[1] = 0;
                 singles[i] -= 2;
             }
-            else if(new_values[9] > 0 && new_values[9] <= singles[i]) {
+            if(new_values[9] > 0 && new_values[9] <= singles[i]) {
                 singles_results[9] = single_types[i];
                 new_values[9] = 0;
                 singles[i] -= 2;
             }
-            else if(new_values[0] > 0 && new_values[0] <= singles[i]) {
+            if(new_values[0] > 0 && new_values[0] <= singles[i]) {
                 singles_results[0] = single_types[i];
                 new_values[0] = 0;
                 singles[i] -= 1;
             }
-            else if(new_values[10] > 0 && new_values[10] <= singles[i]) {
+            if(new_values[10] > 0 && new_values[10] <= singles[i]) {
                 singles_results[10] = single_types[i];
                 new_values[10] = 0;
                 singles[i] -= 1;
             }
-        }while(singles[i] > 0);
+        }
     }
 
     // create doubles results
@@ -293,63 +293,63 @@ btn.addEventListener('click', () => {
     console.log("NEW VALUES: " + new_values);
 
     for(let i = 0; i < 4; i++) {
-        do {
+        if(doubles[i] > 0) {
             if(new_values[5] > 0 && new_values[5] <= doubles[i]) {
                 doubles_results[5] = double_types[i];
                 new_values[5] = 0;
                 doubles[i] -= 6;
             }
-            else if(new_values[4] > 0 && new_values[4] <= doubles[i]) {
+            if(new_values[4] > 0 && new_values[4] <= doubles[i]) {
                 doubles_results[4] = double_types[i];
                 new_values[4] = 0;
                 doubles[i] -= 5;
             }
-            else if(new_values[6] > 0 && new_values[6] <= doubles[i]) {
+            if(new_values[6] > 0 && new_values[6] <= doubles[i]) {
                 doubles_results[6] = double_types[i];
                 new_values[6] = 0;
                 doubles[i] -= 5;
             }
-            else if(new_values[3] > 0 && new_values[3] <= doubles[i]) {
+            if(new_values[3] > 0 && new_values[3] <= doubles[i]) {
                 doubles_results[3] = double_types[i];
                 new_values[3] = 0;
                 doubles[i] -= 4;
             }
-            else if(new_values[7] > 0 && new_values[7] <= doubles[i]) {
+            if(new_values[7] > 0 && new_values[7] <= doubles[i]) {
                 doubles_results[7] = double_types[i];
                 new_values[7] = 0;
                 doubles[i] -= 4;
             }
-            else if(new_values[2] > 0 && new_values[2] <= doubles[i]) {
+            if(new_values[2] > 0 && new_values[2] <= doubles[i]) {
                 doubles_results[2] = double_types[i];
                 new_values[2] = 0;
                 doubles[i] -= 3;
             }
-            else if(new_values[8] > 0 && new_values[8] <= doubles[i]) {
+            if(new_values[8] > 0 && new_values[8] <= doubles[i]) {
                 doubles_results[8] = double_types[i];
                 new_values[8] = 0;
                 doubles[i] -= 3;
             }
-            else if(new_values[1] > 0 && new_values[1] <= doubles[i]) {
+            if(new_values[1] > 0 && new_values[1] <= doubles[i]) {
                 doubles_results[1] = double_types[i];
                 new_values[1] = 0;
                 doubles[i] -= 2;
             }
-            else if(new_values[9] > 0 && new_values[9] <= doubles[i]) {
+            if(new_values[9] > 0 && new_values[9] <= doubles[i]) {
                 doubles_results[9] = double_types[i];
                 new_values[9] = 0;
                 doubles[i] -= 2;
             }
-            else if(new_values[0] > 0 && new_values[0] <= doubles[i]) {
+            if(new_values[0] > 0 && new_values[0] <= doubles[i]) {
                 doubles_results[0] = double_types[i];
                 new_values[0] = 0;
                 doubles[i] -= 1;
             }
-            else if(new_values[10] > 0 && new_values[10] <= doubles[i]) {
+            if(new_values[10] > 0 && new_values[10] <= doubles[i]) {
                 doubles_results[10] = double_types[i];
                 new_values[10] = 0;
                 doubles[i] -= 1;
             }
-        }while(doubles[i] > 0);
+        }
     }
 
     logit();
