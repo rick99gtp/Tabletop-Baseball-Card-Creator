@@ -41,6 +41,10 @@ let stats = {
 
 let singles = [4];
 let doubles = [4];
+let singles_results = [11];
+let doubles_results = [11];
+
+let base_results_available = [[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1]];
 
 let gameFile = "";
 let playByPlayObj = [];
@@ -48,6 +52,9 @@ let searchForPlayerByID = 0;
 let count = 0;
 
 btn.addEventListener('click', () => {
+    // create new array
+    let new_results = new Array(base_results_available);
+
     // get all events for player selected and display
 
     // get player_id based on player choice
@@ -200,6 +207,9 @@ btn.addEventListener('click', () => {
     // store results in variables
     singles = [stats.b1_if, stats.b1_lf, stats.b1_cf, stats.b1_rf];
     doubles = [stats.b2_dgr, stats.b2_lf, stats.b2_cf, stats.b2_rf];
+
+    // create singles results
+
 
     // display on screen
     console.log("PA: " + stats.pa);
