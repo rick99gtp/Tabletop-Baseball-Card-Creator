@@ -42,6 +42,7 @@ let stats = {
 let singles = [];
 let doubles = [];
 let single_types = ["LF", "CF", "RF", "IF"];
+let double_types = ["LF", "CF", "RF", "GR"];
 let range_values = [1,2,3,4,5,6,5,4,3,2,1];
 let singles_results = ["", "", "", "", "", "", "", "", "", "", ""];
 let doubles_results = ['', '', '', '', '', '', '', '', '', '', ''];
@@ -287,10 +288,75 @@ btn.addEventListener('click', () => {
         }while(singles[i] > 0);
     }
 
+    // create doubles results
+    new_values = [...range_values];
+    console.log("NEW VALUES: " + new_values);
+
+    for(let i = 0; i < 4; i++) {
+        do {
+            if(new_values[5] > 0 && new_values[5] <= doubles[i]) {
+                doubles_results[5] = double_types[i];
+                new_values[5] = 0;
+                doubles[i] -= 6;
+            }
+            else if(new_values[4] > 0 && new_values[4] <= doubles[i]) {
+                doubles_results[4] = double_types[i];
+                new_values[4] = 0;
+                doubles[i] -= 5;
+            }
+            else if(new_values[6] > 0 && new_values[6] <= doubles[i]) {
+                doubles_results[6] = double_types[i];
+                new_values[6] = 0;
+                doubles[i] -= 5;
+            }
+            else if(new_values[3] > 0 && new_values[3] <= doubles[i]) {
+                doubles_results[3] = double_types[i];
+                new_values[3] = 0;
+                doubles[i] -= 4;
+            }
+            else if(new_values[7] > 0 && new_values[7] <= doubles[i]) {
+                doubles_results[7] = double_types[i];
+                new_values[7] = 0;
+                doubles[i] -= 4;
+            }
+            else if(new_values[2] > 0 && new_values[2] <= doubles[i]) {
+                doubles_results[2] = double_types[i];
+                new_values[2] = 0;
+                doubles[i] -= 3;
+            }
+            else if(new_values[8] > 0 && new_values[8] <= doubles[i]) {
+                doubles_results[8] = double_types[i];
+                new_values[8] = 0;
+                doubles[i] -= 3;
+            }
+            else if(new_values[1] > 0 && new_values[1] <= doubles[i]) {
+                doubles_results[1] = double_types[i];
+                new_values[1] = 0;
+                doubles[i] -= 2;
+            }
+            else if(new_values[9] > 0 && new_values[9] <= doubles[i]) {
+                doubles_results[9] = double_types[i];
+                new_values[9] = 0;
+                doubles[i] -= 2;
+            }
+            else if(new_values[0] > 0 && new_values[0] <= doubles[i]) {
+                doubles_results[0] = double_types[i];
+                new_values[0] = 0;
+                doubles[i] -= 1;
+            }
+            else if(new_values[10] > 0 && new_values[10] <= doubles[i]) {
+                doubles_results[10] = double_types[i];
+                new_values[10] = 0;
+                doubles[i] -= 1;
+            }
+        }while(doubles[i] > 0);
+    }
+
     logit();
 
     console.log(singles);
     console.log(singles_results);
+    console.log(doubles_results);
 });
 
 function logit() {
