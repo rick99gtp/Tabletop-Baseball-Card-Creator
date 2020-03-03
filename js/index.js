@@ -39,10 +39,12 @@ let stats = {
     gdp: 0
 }
 
-let singles = [4];
-let doubles = [4];
-let singles_results = [11];
-let doubles_results = [11];
+let singles = [];
+let doubles = [];
+let single_types = ["LF", "CF", "RF", "IF"];
+let range_values = [1,2,3,4,5,6,5,4,3,2,1];
+let singles_results = ["", "", "", "", "", "", "", "", "", "", ""];
+let doubles_results = ['', '', '', '', '', '', '', '', '', '', ''];
 
 let base_results_available = [[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1]];
 
@@ -205,12 +207,93 @@ btn.addEventListener('click', () => {
     }
 
     // store results in variables
-    singles = [stats.b1_if, stats.b1_lf, stats.b1_cf, stats.b1_rf];
-    doubles = [stats.b2_dgr, stats.b2_lf, stats.b2_cf, stats.b2_rf];
+    // singles
+    let s_total = stats.b1_if + stats.b1_lf + stats.b1_cf + stats.b1_rf;
+    let s_rf = Math.round((stats.b1_rf / s_total) * 36);
+    let s_lf = Math.round((stats.b1_lf / s_total) * 36);
+    let s_cf = Math.round((stats.b1_cf / s_total) * 36);
+    let s_if = 36 - s_rf - s_lf - s_cf;
+
+    // doubles
+    let d_total = stats.b2_dgr + stats.b2_lf + stats.b2_cf + stats.b2_rf;
+    let d_rf = Math.round((stats.b2_rf / d_total) * 36);
+    let d_lf = Math.round((stats.b2_lf / d_total) * 36);
+    let d_cf = Math.round((stats.b2_cf / d_total) * 36);
+    let d_dgr = 36 - d_rf - d_lf - d_cf;
+
+    singles = [s_lf, s_cf, s_rf, s_if];
+    doubles = [d_lf, d_cf, d_rf, d_dgr];
+
+    let new_values = [...range_values];
 
     // create singles results
+    for(let i = 0; i < 4; i++) {
+        do {
+            if(new_values[5] > 0 && new_values[5] <= singles[i]) {
+                singles_results[5] = single_types[i];
+                new_values[5] = 0;
+                singles[i] -= 6;
+            }
+            else if(new_values[4] > 0 && new_values[4] <= singles[i]) {
+                singles_results[4] = single_types[i];
+                new_values[4] = 0;
+                singles[i] -= 5;
+            }
+            else if(new_values[6] > 0 && new_values[6] <= singles[i]) {
+                singles_results[6] = single_types[i];
+                new_values[6] = 0;
+                singles[i] -= 5;
+            }
+            else if(new_values[3] > 0 && new_values[3] <= singles[i]) {
+                singles_results[3] = single_types[i];
+                new_values[3] = 0;
+                singles[i] -= 4;
+            }
+            else if(new_values[7] > 0 && new_values[7] <= singles[i]) {
+                singles_results[7] = single_types[i];
+                new_values[7] = 0;
+                singles[i] -= 4;
+            }
+            else if(new_values[2] > 0 && new_values[2] <= singles[i]) {
+                singles_results[2] = single_types[i];
+                new_values[2] = 0;
+                singles[i] -= 3;
+            }
+            else if(new_values[8] > 0 && new_values[8] <= singles[i]) {
+                singles_results[8] = single_types[i];
+                new_values[8] = 0;
+                singles[i] -= 3;
+            }
+            else if(new_values[1] > 0 && new_values[1] <= singles[i]) {
+                singles_results[1] = single_types[i];
+                new_values[1] = 0;
+                singles[i] -= 2;
+            }
+            else if(new_values[9] > 0 && new_values[9] <= singles[i]) {
+                singles_results[9] = single_types[i];
+                new_values[9] = 0;
+                singles[i] -= 2;
+            }
+            else if(new_values[0] > 0 && new_values[0] <= singles[i]) {
+                singles_results[0] = single_types[i];
+                new_values[0] = 0;
+                singles[i] -= 1;
+            }
+            else if(new_values[10] > 0 && new_values[10] <= singles[i]) {
+                singles_results[10] = single_types[i];
+                new_values[10] = 0;
+                singles[i] -= 1;
+            }
+        }while(singles[i] > 0);
+    }
 
+    logit();
 
+    console.log(singles);
+    console.log(singles_results);
+});
+
+function logit() {
     // display on screen
     console.log("PA: " + stats.pa);
     console.log("AB: " + stats.ab);
@@ -244,7 +327,7 @@ btn.addEventListener('click', () => {
     console.log("POP: " + stats.pop);
     console.log("LO: " + stats.lo);
     console.log("GDP: " + stats.gdp);
-});
+}
 
 function inputBtnFunction() {
     // get list of all players in file
