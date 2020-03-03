@@ -39,6 +39,9 @@ let stats = {
     gdp: 0
 }
 
+let singles = [4];
+let doubles = [4];
+
 let gameFile = "";
 let playByPlayObj = [];
 let searchForPlayerByID = 0;
@@ -195,6 +198,8 @@ btn.addEventListener('click', () => {
     }
 
     // store results in variables
+    singles = [stats.b1_if, stats.b1_lf, stats.b1_cf, stats.b1_rf];
+    doubles = [stats.b2_dgr, stats.b2_lf, stats.b2_cf, stats.b2_rf];
 
     // display on screen
     console.log("PA: " + stats.pa);
