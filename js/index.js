@@ -623,6 +623,46 @@ function inputBtnFunction() {
 
 function changeSelectedPlayer() {
     searchForPlayerByID = playerSelect.options[playerSelect.selectedIndex].value;
+
+    reset_stats();
+
+}
+
+function reset_stats() {
+    stats.pa = 0;
+    stats.ab = 0;
+    stats.h = 0;
+    stats.hbp = 0;
+    stats.b1_lf = 0;
+    stats.b1_cf = 0;
+    stats.b1_rf = 0;
+    stats.b1_if = 0;
+    stats.b2_lf = 0;
+    stats.b2_cf = 0;
+    stats.b2_rf = 0;
+    stats.b2_dgr = 0;
+    stats.b3_lf = 0;
+    stats.b3_cf = 0;
+    stats.b3_rf = 0;
+    stats.hr_lf = 0;
+    stats.hr_cf = 0;
+    stats.hr_rf = 0;
+    stats.bb = 0;
+    stats.k = 0;
+    stats.hbp = 0;
+    stats.g1 = 0;
+    stats.g2 = 0;
+    stats.g3 = 0;
+    stats.g4 = 0;
+    stats.g5 = 0;
+    stats.g6 = 0;
+    stats.f7 = 0;
+    stats.f8 = 0;
+    stats.f9 = 0;
+    stats.pop = 0;
+    stats.fo = 0;
+    stats.lo = 0;
+    stats.gdp = 0
 }
 
 function getPlayerNames() {
