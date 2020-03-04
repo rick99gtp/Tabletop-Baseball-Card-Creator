@@ -43,11 +43,14 @@ let singles = [];
 let doubles = [];
 let single_types = ["LF", "CF", "RF", "IF"];
 let double_types = ["LF", "CF", "RF", "GR"];
+let out_types = ["HBP", "G1", "G2", "POP", "LO", "G3", "G4", "G5", "G6", "F7", "F9", "F8"];
 let range_values = [1,2,3,4,5,6,5,4,3,2,1];
 let singles_results = ["", "", "", "", "", "", "", "", "", "", ""];
 let doubles_results = ['', '', '', '', '', '', '', '', '', '', ''];
 
-let base_results_available = [[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1],[1,2,3,4,5,6,5,4,3,2,1]];
+let out_results_1 = ["", "", "", "", "", "", "", "", "", "", ""];
+let out_results_2 = ["", "", "", "", "", "", "", "", "", "", ""];
+let out_results_3 = ["", "", "", "", "", "", "", "", "", "", ""];
 
 let gameFile = "";
 let playByPlayObj = [];
@@ -55,9 +58,6 @@ let searchForPlayerByID = 0;
 let count = 0;
 
 btn.addEventListener('click', () => {
-    // create new array
-    let new_results = new Array(base_results_available);
-
     // get all events for player selected and display
 
     // get player_id based on player choice
@@ -290,7 +290,6 @@ btn.addEventListener('click', () => {
 
     // create doubles results
     new_values = [...range_values];
-    console.log("NEW VALUES: " + new_values);
 
     for(let i = 0; i < 4; i++) {
         if(doubles[i] > 0) {
@@ -352,11 +351,213 @@ btn.addEventListener('click', () => {
         }
     }
 
+    // create out results
+    let o_total = stats.hbp + stats.g1 + stats.g2 + stats.pop + stats.lo + stats.g3 + stats.g4 + stats.g5 + stats.g6 + stats.f7 + stats.f9 + stats.f8;
+    let o_hbp = Math.round((stats.hbp / o_total) * 108);
+    let o_g1 = Math.round((stats.g1 / o_total) * 108);
+    let o_g2 = Math.round((stats.g2 / o_total) * 108);
+    let o_pop = Math.round((stats.pop / o_total) * 108);
+    let o_lo = Math.round((stats.lo / o_total) * 108);
+    let o_g3 = Math.round((stats.g3 / o_total) * 108);
+    let o_g4 = Math.round((stats.g4 / o_total) * 108);
+    let o_g5 = Math.round((stats.g5 / o_total) * 108);
+    let o_g6 = Math.round((stats.g6 / o_total) * 108);
+    let o_f7 = Math.round((stats.f7 / o_total) * 108);
+    let o_f9 = Math.round((stats.f9 / o_total) * 108);
+    let o_f8 = 108 - o_hbp - o_g1 - o_g2 - o_pop - o_lo - o_g3 - o_g4 - o_g5 - o_g6 - o_f7 - o_f9;
+
+    outs = [o_hbp, o_g1, o_g2, o_pop, o_lo, o_g3, o_g4, o_g5, o_g6, o_f7, o_f9, o_f8];
+
+    let new_values_1 = [...range_values];
+    let new_values_2 = [...range_values];
+    let new_values_3 = [...range_values];
+
+    for(let i = 0; i < 12; i++) {
+        // Check Column A
+        if(outs[i] > 0) {
+            if(new_values_1[5] > 0 && new_values_1[5] <= outs[i]) {
+                out_results_1[5] = out_types[i];
+                new_values_1[5] = 0;
+                outs[i] -= 6;
+            }
+            if(new_values_1[4] > 0 && new_values_1[4] <= outs[i]) {
+                out_results_1[4] = out_types[i];
+                new_values_1[4] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_1[6] > 0 && new_values_1[6] <= outs[i]) {
+                out_results_1[6] = out_types[i];
+                new_values_1[6] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_1[3] > 0 && new_values_1[3] <= outs[i]) {
+                out_results_1[3] = out_types[i];
+                new_values_1[3] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_1[7] > 0 && new_values_1[7] <= outs[i]) {
+                out_results_1[7] = out_types[i];
+                new_values_1[7] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_1[2] > 0 && new_values_1[2] <= outs[i]) {
+                out_results_1[2] = out_types[i];
+                new_values_1[2] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_1[8] > 0 && new_values_1[8] <= outs[i]) {
+                out_results_1[8] = out_types[i];
+                new_values_1[8] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_1[1] > 0 && new_values_1[1] <= outs[i]) {
+                out_results_1[1] = out_types[i];
+                new_values_1[1] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_1[9] > 0 && new_values_1[9] <= outs[i]) {
+                out_results_1[9] = out_types[i];
+                new_values_1[9] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_1[0] > 0 && new_values_1[0] <= outs[i]) {
+                out_results_1[0] = out_types[i];
+                new_values_1[0] = 0;
+                outs[i] -= 1;
+            }
+            if(new_values_1[10] > 0 && new_values_1[10] <= outs[i]) {
+                out_results_1[10] = out_types[i];
+                new_values_1[10] = 0;
+                outs[i] -= 1;
+            }
+        }
+        // Check Column B
+        if(outs[i] > 0) {
+            if(new_values_2[5] > 0 && new_values_2[5] <= outs[i]) {
+                out_results_2[5] = out_types[i];
+                new_values_2[5] = 0;
+                outs[i] -= 6;
+            }
+            if(new_values_2[4] > 0 && new_values_2[4] <= outs[i]) {
+                out_results_2[4] = out_types[i];
+                new_values_2[4] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_2[6] > 0 && new_values_2[6] <= outs[i]) {
+                out_results_2[6] = out_types[i];
+                new_values_2[6] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_2[3] > 0 && new_values_2[3] <= outs[i]) {
+                out_results_2[3] = out_types[i];
+                new_values_2[3] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_2[7] > 0 && new_values_2[7] <= outs[i]) {
+                out_results_2[7] = out_types[i];
+                new_values_2[7] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_2[2] > 0 && new_values_2[2] <= outs[i]) {
+                out_results_2[2] = out_types[i];
+                new_values_2[2] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_2[8] > 0 && new_values_2[8] <= outs[i]) {
+                out_results_2[8] = out_types[i];
+                new_values_2[8] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_2[1] > 0 && new_values_2[1] <= outs[i]) {
+                out_results_2[1] = out_types[i];
+                new_values_2[1] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_2[9] > 0 && new_values_2[9] <= outs[i]) {
+                out_results_2[9] = out_types[i];
+                new_values_2[9] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_2[0] > 0 && new_values_2[0] <= outs[i]) {
+                out_results_2[0] = out_types[i];
+                new_values_2[0] = 0;
+                outs[i] -= 1;
+            }
+            if(new_values_2[10] > 0 && new_values_2[10] <= outs[i]) {
+                out_results_2[10] = out_types[i];
+                new_values_2[10] = 0;
+                outs[i] -= 1;
+            }
+        }
+
+        // Check Column C
+        if(outs[i] > 0) {
+            if(new_values_3[5] > 0 && new_values_3[5] <= outs[i]) {
+                out_results_3[5] = out_types[i];
+                new_values_3[5] = 0;
+                outs[i] -= 6;
+            }
+            if(new_values_3[4] > 0 && new_values_3[4] <= outs[i]) {
+                out_results_3[4] = out_types[i];
+                new_values_3[4] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_3[6] > 0 && new_values_3[6] <= outs[i]) {
+                out_results_3[6] = out_types[i];
+                new_values_3[6] = 0;
+                outs[i] -= 5;
+            }
+            if(new_values_3[3] > 0 && new_values_3[3] <= outs[i]) {
+                out_results_3[3] = out_types[i];
+                new_values_3[3] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_3[7] > 0 && new_values_3[7] <= outs[i]) {
+                out_results_3[7] = out_types[i];
+                new_values_3[7] = 0;
+                outs[i] -= 4;
+            }
+            if(new_values_3[2] > 0 && new_values_3[2] <= outs[i]) {
+                out_results_3[2] = out_types[i];
+                new_values_3[2] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_3[8] > 0 && new_values_3[8] <= outs[i]) {
+                out_results_3[8] = out_types[i];
+                new_values_3[8] = 0;
+                outs[i] -= 3;
+            }
+            if(new_values_3[1] > 0 && new_values_3[1] <= outs[i]) {
+                out_results_3[1] = out_types[i];
+                new_values_3[1] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_3[9] > 0 && new_values_3[9] <= outs[i]) {
+                out_results_3[9] = out_types[i];
+                new_values_3[9] = 0;
+                outs[i] -= 2;
+            }
+            if(new_values_3[0] > 0 && new_values_3[0] <= outs[i]) {
+                out_results_3[0] = out_types[i];
+                new_values_3[0] = 0;
+                outs[i] -= 1;
+            }
+            if(new_values_3[10] > 0 && new_values_3[10] <= outs[i]) {
+                out_results_3[10] = out_types[i];
+                new_values_3[10] = 0;
+                outs[i] -= 1;
+            }
+        }
+    }
+
     logit();
 
     console.log(singles);
     console.log(singles_results);
     console.log(doubles_results);
+    console.log(out_results_1);
+    console.log(out_results_2);
+    console.log(out_results_3);
 });
 
 function logit() {
