@@ -36,7 +36,10 @@ let stats = {
     pop: 0,
     fo: 0,
     lo: 0,
-    gdp: 0
+    gdp: 0,
+    sf_lf: 0,
+    sf_cf: 0,
+    sf_rf: 0
 }
 
 let singles = [];
@@ -177,12 +180,21 @@ btn.addEventListener('click', () => {
                     }
                     else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
                         stats.f7++;
+                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                            stats.sf_lf++;
+                        }
                     }
                     else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
                         stats.f8++;
+                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                            stats.sf_cf++;
+                        }
                     }
                     else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
                         stats.f9++;
+                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                            stats.sf_rf++;
+                        }
                     }
                     else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
                         stats.pop++;
@@ -594,6 +606,9 @@ function logit() {
     console.log("POP: " + stats.pop);
     console.log("LO: " + stats.lo);
     console.log("GDP: " + stats.gdp);
+    console.log("SF LF: " + stats.sf_lf);
+    console.log("SF CF: " + stats.sf_cf);
+    console.log("SF RF: " + stats.sf_rf);
 }
 
 function inputBtnFunction() {
@@ -662,7 +677,10 @@ function reset_stats() {
     stats.pop = 0;
     stats.fo = 0;
     stats.lo = 0;
-    stats.gdp = 0
+    stats.gdp = 0;
+    stats.sf_lf = 0;
+    stats.sf_cf = 0;
+    stats.sf_rf = 0;
 }
 
 function getPlayerNames() {
