@@ -290,7 +290,7 @@ btn.addEventListener('click', () => {
                     }
                 }
                 else if(playByPlayObj[i].category === "sub"){
-                    if(playByPlayObj[i].play_player_id === pitcherGames[j].inning) {
+                    if(playByPlayObj[i].play_player_id === pitcherGames[j].inning && playByPlayObj[i].start_position === 1) {
                         // stop gathering stats
                         i = iMax;
                     }
