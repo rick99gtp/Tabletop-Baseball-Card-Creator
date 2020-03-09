@@ -301,500 +301,700 @@ btn.addEventListener('click', () => {
                 }
             }
         }
-    }
 
-    function getBatterStats() {
-        // loop through play-by-play file looking for selected players events
-    for(let i = 0, max = playByPlayObj.length; i < max; i++) {
-        if(playByPlayObj[i].category === "play") {
-            if(playByPlayObj[i].play_player_id === searchForPlayerByID) {
-                if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "CS" && playByPlayObj[i].play_result.substring(0,2) !== "WP" && playByPlayObj[i].play_result.substring(0,2) !== "BK" &&  playByPlayObj[i].play_result.substring(0,2) !== "PO" &&  playByPlayObj[i].play_result.substring(0,2) !== "DI" &&  playByPlayObj[i].play_result.substring(0,4) !== "C/E2" &&  playByPlayObj[i].play_result.substring(0,2) !== "PB" && playByPlayObj[i].play_result.substring(0,2) !== "OA" && playByPlayObj[i].play_result.substring(0,4) !== "POCS" && playByPlayObj[i].play_result.substring(0,4) !== "FLE" && playByPlayObj[i].play_result.substring(0,4) !== "C/E3") {
-                    // add PA
-                    stats.pa++;
-                    count++;
-                    console.log(count + ": " + playByPlayObj[i].play_result);
+        // create out results
+        let o_total = stats.hbp + stats.g1 + stats.g2 + stats.pop + stats.lo + stats.g3 + stats.g4 + stats.g5 + stats.g6 + stats.f7 + stats.f9 + stats.f8;
+        let o_hbp = Math.round((stats.hbp / o_total) * 108);
+        let o_g1 = Math.round((stats.g1 / o_total) * 108);
+        let o_g2 = Math.round((stats.g2 / o_total) * 108);
+        let o_pop = Math.round((stats.pop / o_total) * 108);
+        let o_lo = Math.round((stats.lo / o_total) * 108);
+        let o_g3 = Math.round((stats.g3 / o_total) * 108);
+        let o_g4 = Math.round((stats.g4 / o_total) * 108);
+        let o_g5 = Math.round((stats.g5 / o_total) * 108);
+        let o_g6 = Math.round((stats.g6 / o_total) * 108);
+        let o_f7 = Math.round((stats.f7 / o_total) * 108);
+        let o_f9 = Math.round((stats.f9 / o_total) * 108);
 
-                    if(playByPlayObj[i].play_result.charAt(0) === "K") {
-                        stats.k++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.charAt(0) === "W" || playByPlayObj[i].play_result.substring(0,2) === "IW") {
-                        stats.bb++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "S9") {
-                        stats.b1_rf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "S8") {
-                        stats.b1_cf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "S7") {
-                        stats.b1_lf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "S1" || playByPlayObj[i].play_result.substring(0,2) === "S2" || playByPlayObj[i].play_result.substring(0,2) === "S3" || playByPlayObj[i].play_result.substring(0,2) === "S4" || playByPlayObj[i].play_result.substring(0,2) === "S5" || playByPlayObj[i].play_result.substring(0,2) === "S6") {
-                        stats.b1_if++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D9") {
-                        stats.b2_rf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "D/L") {
-                        stats.b2_cf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
-                        stats.b2_lf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "DGR") {
-                        stats.b2_dgr++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "T9") {
-                        stats.b3_rf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "T8") {
-                        stats.b3_cf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "T7") {
-                        stats.b3_lf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,4) === "HR/9") {
-                        stats.hr_rf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8" || playByPlayObj[i].play_result.substring(0,5) === "HR8/8") {
-                        stats.hr_cf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,4) === "HR/7") {
-                        stats.hr_lf++;
-                        stats.h++;
-                        stats.ab++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,2) === "HP") {
-                        stats.hbp++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/G" || playByPlayObj[i].play_result.substring(0,2) === "12" || playByPlayObj[i].play_result.substring(0,2) === "13" || playByPlayObj[i].play_result.substring(0,2) === "E1" || playByPlayObj[i].play_result.substring(0,5) === "FC1/G" || playByPlayObj[i].play_result.substring(0,2) === "14" || playByPlayObj[i].play_result.substring(0,2) === "16" || playByPlayObj[i].play_result.substring(0,4) === "1(B)") {
-                        stats.g1++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "2/G" || playByPlayObj[i].play_result.substring(0,2) === "23" || playByPlayObj[i].play_result.substring(0,2) === "E2" || playByPlayObj[i].play_result.substring(0,5) === "FC2/G") {
-                        stats.g2++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "3/G" || playByPlayObj[i].play_result.substring(0,2) === "E3" || playByPlayObj[i].play_result.substring(0,3) === "FC3" || playByPlayObj[i].play_result.substring(0,2) === "31"  || playByPlayObj[i].play_result.substring(0,2) === "36" || playByPlayObj[i].play_result.substring(0,2) === "32" || playByPlayObj[i].play_result.substring(0,4) === "3(B)") {
-                        stats.g3++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "4/G" || playByPlayObj[i].play_result.substring(0,2) === "43" || playByPlayObj[i].play_result.substring(0,2) === "45" || playByPlayObj[i].play_result.substring(0,2) === "E4" || playByPlayObj[i].play_result.substring(0,3) === "FC4" || playByPlayObj[i].play_result.substring(0,4) === "4(1)" || playByPlayObj[i].play_result.substring(0,2) === "46" || playByPlayObj[i].play_result.substring(0,2) === "41" || playByPlayObj[i].play_result.substring(0,4) === "4(B)") {
-                        stats.g4++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "5/G" || playByPlayObj[i].play_result.substring(0,2) === "53" || playByPlayObj[i].play_result.substring(0,2) === "54" || playByPlayObj[i].play_result.substring(0,2) === "E5" || playByPlayObj[i].play_result.substring(0,3) === "FC5" || playByPlayObj[i].play_result.substring(0,4) === "5(2)" || playByPlayObj[i].play_result.substring(0,2) === "56" || playByPlayObj[i].play_result.substring(0,2) === "52" || playByPlayObj[i].play_result.substring(0,4) === "5(B)") {
-                        stats.g5++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "6/G" || playByPlayObj[i].play_result.substring(0,2) === "63" || playByPlayObj[i].play_result.substring(0,2) === "64" || playByPlayObj[i].play_result.substring(0,2) === "65" || playByPlayObj[i].play_result.substring(0,2) === "E6" || playByPlayObj[i].play_result.substring(0,3) === "FC6" || playByPlayObj[i].play_result.substring(0,4) === "6(1)" || playByPlayObj[i].play_result.substring(0,4) === "6(B)") {
-                        stats.g6++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
-                        stats.f7++;
-                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                            stats.sf_lf++;
-                        }
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
-                        stats.f8++;
-                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                            stats.sf_cf++;
-                        }
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
-                        stats.f9++;
-                        if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                            stats.sf_rf++;
-                        }
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
-                        stats.pop++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
-                        stats.lo++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
-                        stats.lo++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
-                        stats.lo++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
-                        stats.lo++;
-                    }
-                    else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
-                        stats.lo++;
-                    }
+        let o_f8 = 108 - o_hbp - o_g1 - o_g2 - o_pop - o_lo - o_g3 - o_g4 - o_g5 - o_g6 - o_f7 - o_f9;
+
+        outs = [o_hbp, o_g1, o_g2, o_pop, o_lo, o_g3, o_g4, o_g5, o_g6, o_f7, o_f9, o_f8];
+
+        let new_values_1 = [...range_values];
+        let new_values_2 = [...range_values];
+        let new_values_3 = [...range_values];
+
+        for(let i = 0; i < 12; i++) {
+            // Check Column A
+            if(outs[i] > 0) {
+                if(new_values_1[5] > 0 && new_values_1[5] <= outs[i]) {
+                    out_results_1[5] = out_types[i];
+                    new_values_1[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_1[4] > 0 && new_values_1[4] <= outs[i]) {
+                    out_results_1[4] = out_types[i];
+                    new_values_1[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_1[6] > 0 && new_values_1[6] <= outs[i]) {
+                    out_results_1[6] = out_types[i];
+                    new_values_1[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_1[3] > 0 && new_values_1[3] <= outs[i]) {
+                    out_results_1[3] = out_types[i];
+                    new_values_1[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_1[7] > 0 && new_values_1[7] <= outs[i]) {
+                    out_results_1[7] = out_types[i];
+                    new_values_1[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_1[2] > 0 && new_values_1[2] <= outs[i]) {
+                    out_results_1[2] = out_types[i];
+                    new_values_1[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_1[8] > 0 && new_values_1[8] <= outs[i]) {
+                    out_results_1[8] = out_types[i];
+                    new_values_1[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_1[1] > 0 && new_values_1[1] <= outs[i]) {
+                    out_results_1[1] = out_types[i];
+                    new_values_1[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_1[9] > 0 && new_values_1[9] <= outs[i]) {
+                    out_results_1[9] = out_types[i];
+                    new_values_1[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_1[0] > 0 && new_values_1[0] <= outs[i]) {
+                    out_results_1[0] = out_types[i];
+                    new_values_1[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_1[10] > 0 && new_values_1[10] <= outs[i]) {
+                    out_results_1[10] = out_types[i];
+                    new_values_1[10] = 0;
+                    outs[i] -= 1;
+                }
+            }
+            // Check Column B
+            if(outs[i] > 0) {
+                if(new_values_2[5] > 0 && new_values_2[5] <= outs[i]) {
+                    out_results_2[5] = out_types[i];
+                    new_values_2[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_2[4] > 0 && new_values_2[4] <= outs[i]) {
+                    out_results_2[4] = out_types[i];
+                    new_values_2[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_2[6] > 0 && new_values_2[6] <= outs[i]) {
+                    out_results_2[6] = out_types[i];
+                    new_values_2[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_2[3] > 0 && new_values_2[3] <= outs[i]) {
+                    out_results_2[3] = out_types[i];
+                    new_values_2[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_2[7] > 0 && new_values_2[7] <= outs[i]) {
+                    out_results_2[7] = out_types[i];
+                    new_values_2[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_2[2] > 0 && new_values_2[2] <= outs[i]) {
+                    out_results_2[2] = out_types[i];
+                    new_values_2[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_2[8] > 0 && new_values_2[8] <= outs[i]) {
+                    out_results_2[8] = out_types[i];
+                    new_values_2[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_2[1] > 0 && new_values_2[1] <= outs[i]) {
+                    out_results_2[1] = out_types[i];
+                    new_values_2[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_2[9] > 0 && new_values_2[9] <= outs[i]) {
+                    out_results_2[9] = out_types[i];
+                    new_values_2[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_2[0] > 0 && new_values_2[0] <= outs[i]) {
+                    out_results_2[0] = out_types[i];
+                    new_values_2[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_2[10] > 0 && new_values_2[10] <= outs[i]) {
+                    out_results_2[10] = out_types[i];
+                    new_values_2[10] = 0;
+                    outs[i] -= 1;
+                }
+            }
+
+            // Check Column C
+            if(outs[i] > 0) {
+                if(new_values_3[5] > 0 && new_values_3[5] <= outs[i]) {
+                    out_results_3[5] = out_types[i];
+                    new_values_3[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_3[4] > 0 && new_values_3[4] <= outs[i]) {
+                    out_results_3[4] = out_types[i];
+                    new_values_3[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_3[6] > 0 && new_values_3[6] <= outs[i]) {
+                    out_results_3[6] = out_types[i];
+                    new_values_3[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_3[3] > 0 && new_values_3[3] <= outs[i]) {
+                    out_results_3[3] = out_types[i];
+                    new_values_3[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_3[7] > 0 && new_values_3[7] <= outs[i]) {
+                    out_results_3[7] = out_types[i];
+                    new_values_3[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_3[2] > 0 && new_values_3[2] <= outs[i]) {
+                    out_results_3[2] = out_types[i];
+                    new_values_3[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_3[8] > 0 && new_values_3[8] <= outs[i]) {
+                    out_results_3[8] = out_types[i];
+                    new_values_3[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_3[1] > 0 && new_values_3[1] <= outs[i]) {
+                    out_results_3[1] = out_types[i];
+                    new_values_3[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_3[9] > 0 && new_values_3[9] <= outs[i]) {
+                    out_results_3[9] = out_types[i];
+                    new_values_3[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_3[0] > 0 && new_values_3[0] <= outs[i]) {
+                    out_results_3[0] = out_types[i];
+                    new_values_3[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_3[10] > 0 && new_values_3[10] <= outs[i]) {
+                    out_results_3[10] = out_types[i];
+                    new_values_3[10] = 0;
+                    outs[i] -= 1;
                 }
             }
         }
     }
 
-    // store results in variables
-    // singles
-    let s_total = stats.b1_if + stats.b1_lf + stats.b1_cf + stats.b1_rf;
-    let s_rf = Math.round((stats.b1_rf / s_total) * 36);
-    let s_lf = Math.round((stats.b1_lf / s_total) * 36);
-    let s_cf = Math.round((stats.b1_cf / s_total) * 36);
-    let s_if = 36 - s_rf - s_lf - s_cf;
+    function getBatterStats() {
+        // loop through play-by-play file looking for selected players events
+        for(let i = 0, max = playByPlayObj.length; i < max; i++) {
+            if(playByPlayObj[i].category === "play") {
+                if(playByPlayObj[i].play_player_id === searchForPlayerByID) {
+                    if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "CS" && playByPlayObj[i].play_result.substring(0,2) !== "WP" && playByPlayObj[i].play_result.substring(0,2) !== "BK" &&  playByPlayObj[i].play_result.substring(0,2) !== "PO" &&  playByPlayObj[i].play_result.substring(0,2) !== "DI" &&  playByPlayObj[i].play_result.substring(0,4) !== "C/E2" &&  playByPlayObj[i].play_result.substring(0,2) !== "PB" && playByPlayObj[i].play_result.substring(0,2) !== "OA" && playByPlayObj[i].play_result.substring(0,4) !== "POCS" && playByPlayObj[i].play_result.substring(0,4) !== "FLE" && playByPlayObj[i].play_result.substring(0,4) !== "C/E3") {
+                        // add PA
+                        stats.pa++;
+                        count++;
+                        console.log(count + ": " + playByPlayObj[i].play_result);
 
-    // doubles
-    let d_total = stats.b2_dgr + stats.b2_lf + stats.b2_cf + stats.b2_rf;
-    let d_rf = Math.round((stats.b2_rf / d_total) * 36);
-    let d_lf = Math.round((stats.b2_lf / d_total) * 36);
-    let d_cf = Math.round((stats.b2_cf / d_total) * 36);
-    let d_dgr = 36 - d_rf - d_lf - d_cf;
-
-    singles = [s_lf, s_cf, s_rf, s_if];
-    doubles = [d_lf, d_cf, d_rf, d_dgr];
-
-    let new_values = [...range_values];
-
-    // create singles results
-    for(let i = 0; i < 4; i++) {
-        if(singles[i] > 0) {
-            if(new_values[5] > 0 && new_values[5] <= singles[i]) {
-                singles_results[5] = single_types[i];
-                new_values[5] = 0;
-                singles[i] -= 6;
-            }
-            if(new_values[4] > 0 && new_values[4] <= singles[i]) {
-                singles_results[4] = single_types[i];
-                new_values[4] = 0;
-                singles[i] -= 5;
-            }
-            if(new_values[6] > 0 && new_values[6] <= singles[i]) {
-                singles_results[6] = single_types[i];
-                new_values[6] = 0;
-                singles[i] -= 5;
-            }
-            if(new_values[3] > 0 && new_values[3] <= singles[i]) {
-                singles_results[3] = single_types[i];
-                new_values[3] = 0;
-                singles[i] -= 4;
-            }
-            if(new_values[7] > 0 && new_values[7] <= singles[i]) {
-                singles_results[7] = single_types[i];
-                new_values[7] = 0;
-                singles[i] -= 4;
-            }
-            if(new_values[2] > 0 && new_values[2] <= singles[i]) {
-                singles_results[2] = single_types[i];
-                new_values[2] = 0;
-                singles[i] -= 3;
-            }
-            if(new_values[8] > 0 && new_values[8] <= singles[i]) {
-                singles_results[8] = single_types[i];
-                new_values[8] = 0;
-                singles[i] -= 3;
-            }
-            if(new_values[1] > 0 && new_values[1] <= singles[i]) {
-                singles_results[1] = single_types[i];
-                new_values[1] = 0;
-                singles[i] -= 2;
-            }
-            if(new_values[9] > 0 && new_values[9] <= singles[i]) {
-                singles_results[9] = single_types[i];
-                new_values[9] = 0;
-                singles[i] -= 2;
-            }
-            if(new_values[0] > 0 && new_values[0] <= singles[i]) {
-                singles_results[0] = single_types[i];
-                new_values[0] = 0;
-                singles[i] -= 1;
-            }
-            if(new_values[10] > 0 && new_values[10] <= singles[i]) {
-                singles_results[10] = single_types[i];
-                new_values[10] = 0;
-                singles[i] -= 1;
-            }
-        }
-    }
-
-    // create doubles results
-    new_values = [...range_values];
-
-    for(let i = 0; i < 4; i++) {
-        if(doubles[i] > 0) {
-            if(new_values[5] > 0 && new_values[5] <= doubles[i]) {
-                doubles_results[5] = double_types[i];
-                new_values[5] = 0;
-                doubles[i] -= 6;
-            }
-            if(new_values[4] > 0 && new_values[4] <= doubles[i]) {
-                doubles_results[4] = double_types[i];
-                new_values[4] = 0;
-                doubles[i] -= 5;
-            }
-            if(new_values[6] > 0 && new_values[6] <= doubles[i]) {
-                doubles_results[6] = double_types[i];
-                new_values[6] = 0;
-                doubles[i] -= 5;
-            }
-            if(new_values[3] > 0 && new_values[3] <= doubles[i]) {
-                doubles_results[3] = double_types[i];
-                new_values[3] = 0;
-                doubles[i] -= 4;
-            }
-            if(new_values[7] > 0 && new_values[7] <= doubles[i]) {
-                doubles_results[7] = double_types[i];
-                new_values[7] = 0;
-                doubles[i] -= 4;
-            }
-            if(new_values[2] > 0 && new_values[2] <= doubles[i]) {
-                doubles_results[2] = double_types[i];
-                new_values[2] = 0;
-                doubles[i] -= 3;
-            }
-            if(new_values[8] > 0 && new_values[8] <= doubles[i]) {
-                doubles_results[8] = double_types[i];
-                new_values[8] = 0;
-                doubles[i] -= 3;
-            }
-            if(new_values[1] > 0 && new_values[1] <= doubles[i]) {
-                doubles_results[1] = double_types[i];
-                new_values[1] = 0;
-                doubles[i] -= 2;
-            }
-            if(new_values[9] > 0 && new_values[9] <= doubles[i]) {
-                doubles_results[9] = double_types[i];
-                new_values[9] = 0;
-                doubles[i] -= 2;
-            }
-            if(new_values[0] > 0 && new_values[0] <= doubles[i]) {
-                doubles_results[0] = double_types[i];
-                new_values[0] = 0;
-                doubles[i] -= 1;
-            }
-            if(new_values[10] > 0 && new_values[10] <= doubles[i]) {
-                doubles_results[10] = double_types[i];
-                new_values[10] = 0;
-                doubles[i] -= 1;
-            }
-        }
-    }
-
-    // create out results
-    let o_total = stats.hbp + stats.g1 + stats.g2 + stats.pop + stats.lo + stats.g3 + stats.g4 + stats.g5 + stats.g6 + stats.f7 + stats.f9 + stats.f8;
-    let o_hbp = Math.round((stats.hbp / o_total) * 108);
-    let o_g1 = Math.round((stats.g1 / o_total) * 108);
-    let o_g2 = Math.round((stats.g2 / o_total) * 108);
-    let o_pop = Math.round((stats.pop / o_total) * 108);
-    let o_lo = Math.round((stats.lo / o_total) * 108);
-    let o_g3 = Math.round((stats.g3 / o_total) * 108);
-    let o_g4 = Math.round((stats.g4 / o_total) * 108);
-    let o_g5 = Math.round((stats.g5 / o_total) * 108);
-    let o_g6 = Math.round((stats.g6 / o_total) * 108);
-    let o_f7 = Math.round((stats.f7 / o_total) * 108);
-    let o_f9 = Math.round((stats.f9 / o_total) * 108);
-    let o_f8 = 108 - o_hbp - o_g1 - o_g2 - o_pop - o_lo - o_g3 - o_g4 - o_g5 - o_g6 - o_f7 - o_f9;
-
-    outs = [o_hbp, o_g1, o_g2, o_pop, o_lo, o_g3, o_g4, o_g5, o_g6, o_f7, o_f9, o_f8];
-
-    let new_values_1 = [...range_values];
-    let new_values_2 = [...range_values];
-    let new_values_3 = [...range_values];
-
-    for(let i = 0; i < 12; i++) {
-        // Check Column A
-        if(outs[i] > 0) {
-            if(new_values_1[5] > 0 && new_values_1[5] <= outs[i]) {
-                out_results_1[5] = out_types[i];
-                new_values_1[5] = 0;
-                outs[i] -= 6;
-            }
-            if(new_values_1[4] > 0 && new_values_1[4] <= outs[i]) {
-                out_results_1[4] = out_types[i];
-                new_values_1[4] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_1[6] > 0 && new_values_1[6] <= outs[i]) {
-                out_results_1[6] = out_types[i];
-                new_values_1[6] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_1[3] > 0 && new_values_1[3] <= outs[i]) {
-                out_results_1[3] = out_types[i];
-                new_values_1[3] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_1[7] > 0 && new_values_1[7] <= outs[i]) {
-                out_results_1[7] = out_types[i];
-                new_values_1[7] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_1[2] > 0 && new_values_1[2] <= outs[i]) {
-                out_results_1[2] = out_types[i];
-                new_values_1[2] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_1[8] > 0 && new_values_1[8] <= outs[i]) {
-                out_results_1[8] = out_types[i];
-                new_values_1[8] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_1[1] > 0 && new_values_1[1] <= outs[i]) {
-                out_results_1[1] = out_types[i];
-                new_values_1[1] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_1[9] > 0 && new_values_1[9] <= outs[i]) {
-                out_results_1[9] = out_types[i];
-                new_values_1[9] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_1[0] > 0 && new_values_1[0] <= outs[i]) {
-                out_results_1[0] = out_types[i];
-                new_values_1[0] = 0;
-                outs[i] -= 1;
-            }
-            if(new_values_1[10] > 0 && new_values_1[10] <= outs[i]) {
-                out_results_1[10] = out_types[i];
-                new_values_1[10] = 0;
-                outs[i] -= 1;
-            }
-        }
-        // Check Column B
-        if(outs[i] > 0) {
-            if(new_values_2[5] > 0 && new_values_2[5] <= outs[i]) {
-                out_results_2[5] = out_types[i];
-                new_values_2[5] = 0;
-                outs[i] -= 6;
-            }
-            if(new_values_2[4] > 0 && new_values_2[4] <= outs[i]) {
-                out_results_2[4] = out_types[i];
-                new_values_2[4] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_2[6] > 0 && new_values_2[6] <= outs[i]) {
-                out_results_2[6] = out_types[i];
-                new_values_2[6] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_2[3] > 0 && new_values_2[3] <= outs[i]) {
-                out_results_2[3] = out_types[i];
-                new_values_2[3] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_2[7] > 0 && new_values_2[7] <= outs[i]) {
-                out_results_2[7] = out_types[i];
-                new_values_2[7] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_2[2] > 0 && new_values_2[2] <= outs[i]) {
-                out_results_2[2] = out_types[i];
-                new_values_2[2] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_2[8] > 0 && new_values_2[8] <= outs[i]) {
-                out_results_2[8] = out_types[i];
-                new_values_2[8] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_2[1] > 0 && new_values_2[1] <= outs[i]) {
-                out_results_2[1] = out_types[i];
-                new_values_2[1] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_2[9] > 0 && new_values_2[9] <= outs[i]) {
-                out_results_2[9] = out_types[i];
-                new_values_2[9] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_2[0] > 0 && new_values_2[0] <= outs[i]) {
-                out_results_2[0] = out_types[i];
-                new_values_2[0] = 0;
-                outs[i] -= 1;
-            }
-            if(new_values_2[10] > 0 && new_values_2[10] <= outs[i]) {
-                out_results_2[10] = out_types[i];
-                new_values_2[10] = 0;
-                outs[i] -= 1;
+                        if(playByPlayObj[i].play_result.charAt(0) === "K") {
+                            stats.k++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.charAt(0) === "W" || playByPlayObj[i].play_result.substring(0,2) === "IW") {
+                            stats.bb++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "S9") {
+                            stats.b1_rf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "S8") {
+                            stats.b1_cf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "S7") {
+                            stats.b1_lf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "S1" || playByPlayObj[i].play_result.substring(0,2) === "S2" || playByPlayObj[i].play_result.substring(0,2) === "S3" || playByPlayObj[i].play_result.substring(0,2) === "S4" || playByPlayObj[i].play_result.substring(0,2) === "S5" || playByPlayObj[i].play_result.substring(0,2) === "S6") {
+                            stats.b1_if++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "D9") {
+                            stats.b2_rf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "D/L") {
+                            stats.b2_cf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
+                            stats.b2_lf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "DGR") {
+                            stats.b2_dgr++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "T9") {
+                            stats.b3_rf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "T8") {
+                            stats.b3_cf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "T7") {
+                            stats.b3_lf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/9") {
+                            stats.hr_rf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8" || playByPlayObj[i].play_result.substring(0,5) === "HR8/8") {
+                            stats.hr_cf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/7") {
+                            stats.hr_lf++;
+                            stats.h++;
+                            stats.ab++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,2) === "HP") {
+                            stats.hbp++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/G" || playByPlayObj[i].play_result.substring(0,2) === "12" || playByPlayObj[i].play_result.substring(0,2) === "13" || playByPlayObj[i].play_result.substring(0,2) === "E1" || playByPlayObj[i].play_result.substring(0,5) === "FC1/G" || playByPlayObj[i].play_result.substring(0,2) === "14" || playByPlayObj[i].play_result.substring(0,2) === "16" || playByPlayObj[i].play_result.substring(0,4) === "1(B)") {
+                            stats.g1++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "2/G" || playByPlayObj[i].play_result.substring(0,2) === "23" || playByPlayObj[i].play_result.substring(0,2) === "E2" || playByPlayObj[i].play_result.substring(0,5) === "FC2/G") {
+                            stats.g2++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "3/G" || playByPlayObj[i].play_result.substring(0,2) === "E3" || playByPlayObj[i].play_result.substring(0,3) === "FC3" || playByPlayObj[i].play_result.substring(0,2) === "31"  || playByPlayObj[i].play_result.substring(0,2) === "36" || playByPlayObj[i].play_result.substring(0,2) === "32" || playByPlayObj[i].play_result.substring(0,4) === "3(B)") {
+                            stats.g3++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "4/G" || playByPlayObj[i].play_result.substring(0,2) === "43" || playByPlayObj[i].play_result.substring(0,2) === "45" || playByPlayObj[i].play_result.substring(0,2) === "E4" || playByPlayObj[i].play_result.substring(0,3) === "FC4" || playByPlayObj[i].play_result.substring(0,4) === "4(1)" || playByPlayObj[i].play_result.substring(0,2) === "46" || playByPlayObj[i].play_result.substring(0,2) === "41" || playByPlayObj[i].play_result.substring(0,4) === "4(B)") {
+                            stats.g4++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "5/G" || playByPlayObj[i].play_result.substring(0,2) === "53" || playByPlayObj[i].play_result.substring(0,2) === "54" || playByPlayObj[i].play_result.substring(0,2) === "E5" || playByPlayObj[i].play_result.substring(0,3) === "FC5" || playByPlayObj[i].play_result.substring(0,4) === "5(2)" || playByPlayObj[i].play_result.substring(0,2) === "56" || playByPlayObj[i].play_result.substring(0,2) === "52" || playByPlayObj[i].play_result.substring(0,4) === "5(B)") {
+                            stats.g5++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "6/G" || playByPlayObj[i].play_result.substring(0,2) === "63" || playByPlayObj[i].play_result.substring(0,2) === "64" || playByPlayObj[i].play_result.substring(0,2) === "65" || playByPlayObj[i].play_result.substring(0,2) === "E6" || playByPlayObj[i].play_result.substring(0,3) === "FC6" || playByPlayObj[i].play_result.substring(0,4) === "6(1)" || playByPlayObj[i].play_result.substring(0,4) === "6(B)") {
+                            stats.g6++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
+                            stats.f7++;
+                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                stats.sf_lf++;
+                            }
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
+                            stats.f8++;
+                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                stats.sf_cf++;
+                            }
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
+                            stats.f9++;
+                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                stats.sf_rf++;
+                            }
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
+                            stats.pop++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
+                            stats.lo++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
+                            stats.lo++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
+                            stats.lo++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
+                            stats.lo++;
+                        }
+                        else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
+                            stats.lo++;
+                        }
+                    }
+                }
             }
         }
 
-        // Check Column C
-        if(outs[i] > 0) {
-            if(new_values_3[5] > 0 && new_values_3[5] <= outs[i]) {
-                out_results_3[5] = out_types[i];
-                new_values_3[5] = 0;
-                outs[i] -= 6;
-            }
-            if(new_values_3[4] > 0 && new_values_3[4] <= outs[i]) {
-                out_results_3[4] = out_types[i];
-                new_values_3[4] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_3[6] > 0 && new_values_3[6] <= outs[i]) {
-                out_results_3[6] = out_types[i];
-                new_values_3[6] = 0;
-                outs[i] -= 5;
-            }
-            if(new_values_3[3] > 0 && new_values_3[3] <= outs[i]) {
-                out_results_3[3] = out_types[i];
-                new_values_3[3] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_3[7] > 0 && new_values_3[7] <= outs[i]) {
-                out_results_3[7] = out_types[i];
-                new_values_3[7] = 0;
-                outs[i] -= 4;
-            }
-            if(new_values_3[2] > 0 && new_values_3[2] <= outs[i]) {
-                out_results_3[2] = out_types[i];
-                new_values_3[2] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_3[8] > 0 && new_values_3[8] <= outs[i]) {
-                out_results_3[8] = out_types[i];
-                new_values_3[8] = 0;
-                outs[i] -= 3;
-            }
-            if(new_values_3[1] > 0 && new_values_3[1] <= outs[i]) {
-                out_results_3[1] = out_types[i];
-                new_values_3[1] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_3[9] > 0 && new_values_3[9] <= outs[i]) {
-                out_results_3[9] = out_types[i];
-                new_values_3[9] = 0;
-                outs[i] -= 2;
-            }
-            if(new_values_3[0] > 0 && new_values_3[0] <= outs[i]) {
-                out_results_3[0] = out_types[i];
-                new_values_3[0] = 0;
-                outs[i] -= 1;
-            }
-            if(new_values_3[10] > 0 && new_values_3[10] <= outs[i]) {
-                out_results_3[10] = out_types[i];
-                new_values_3[10] = 0;
-                outs[i] -= 1;
+        // store results in variables
+        // singles
+        let s_total = stats.b1_if + stats.b1_lf + stats.b1_cf + stats.b1_rf;
+        let s_rf = Math.round((stats.b1_rf / s_total) * 36);
+        let s_lf = Math.round((stats.b1_lf / s_total) * 36);
+        let s_cf = Math.round((stats.b1_cf / s_total) * 36);
+        let s_if = 36 - s_rf - s_lf - s_cf;
+
+        // doubles
+        let d_total = stats.b2_dgr + stats.b2_lf + stats.b2_cf + stats.b2_rf;
+        let d_rf = Math.round((stats.b2_rf / d_total) * 36);
+        let d_lf = Math.round((stats.b2_lf / d_total) * 36);
+        let d_cf = Math.round((stats.b2_cf / d_total) * 36);
+        let d_dgr = 36 - d_rf - d_lf - d_cf;
+
+        singles = [s_lf, s_cf, s_rf, s_if];
+        doubles = [d_lf, d_cf, d_rf, d_dgr];
+
+        let new_values = [...range_values];
+
+        // create singles results
+        for(let i = 0; i < 4; i++) {
+            if(singles[i] > 0) {
+                if(new_values[5] > 0 && new_values[5] <= singles[i]) {
+                    singles_results[5] = single_types[i];
+                    new_values[5] = 0;
+                    singles[i] -= 6;
+                }
+                if(new_values[4] > 0 && new_values[4] <= singles[i]) {
+                    singles_results[4] = single_types[i];
+                    new_values[4] = 0;
+                    singles[i] -= 5;
+                }
+                if(new_values[6] > 0 && new_values[6] <= singles[i]) {
+                    singles_results[6] = single_types[i];
+                    new_values[6] = 0;
+                    singles[i] -= 5;
+                }
+                if(new_values[3] > 0 && new_values[3] <= singles[i]) {
+                    singles_results[3] = single_types[i];
+                    new_values[3] = 0;
+                    singles[i] -= 4;
+                }
+                if(new_values[7] > 0 && new_values[7] <= singles[i]) {
+                    singles_results[7] = single_types[i];
+                    new_values[7] = 0;
+                    singles[i] -= 4;
+                }
+                if(new_values[2] > 0 && new_values[2] <= singles[i]) {
+                    singles_results[2] = single_types[i];
+                    new_values[2] = 0;
+                    singles[i] -= 3;
+                }
+                if(new_values[8] > 0 && new_values[8] <= singles[i]) {
+                    singles_results[8] = single_types[i];
+                    new_values[8] = 0;
+                    singles[i] -= 3;
+                }
+                if(new_values[1] > 0 && new_values[1] <= singles[i]) {
+                    singles_results[1] = single_types[i];
+                    new_values[1] = 0;
+                    singles[i] -= 2;
+                }
+                if(new_values[9] > 0 && new_values[9] <= singles[i]) {
+                    singles_results[9] = single_types[i];
+                    new_values[9] = 0;
+                    singles[i] -= 2;
+                }
+                if(new_values[0] > 0 && new_values[0] <= singles[i]) {
+                    singles_results[0] = single_types[i];
+                    new_values[0] = 0;
+                    singles[i] -= 1;
+                }
+                if(new_values[10] > 0 && new_values[10] <= singles[i]) {
+                    singles_results[10] = single_types[i];
+                    new_values[10] = 0;
+                    singles[i] -= 1;
+                }
             }
         }
-    }
+
+        // create doubles results
+        new_values = [...range_values];
+
+        for(let i = 0; i < 4; i++) {
+            if(doubles[i] > 0) {
+                if(new_values[5] > 0 && new_values[5] <= doubles[i]) {
+                    doubles_results[5] = double_types[i];
+                    new_values[5] = 0;
+                    doubles[i] -= 6;
+                }
+                if(new_values[4] > 0 && new_values[4] <= doubles[i]) {
+                    doubles_results[4] = double_types[i];
+                    new_values[4] = 0;
+                    doubles[i] -= 5;
+                }
+                if(new_values[6] > 0 && new_values[6] <= doubles[i]) {
+                    doubles_results[6] = double_types[i];
+                    new_values[6] = 0;
+                    doubles[i] -= 5;
+                }
+                if(new_values[3] > 0 && new_values[3] <= doubles[i]) {
+                    doubles_results[3] = double_types[i];
+                    new_values[3] = 0;
+                    doubles[i] -= 4;
+                }
+                if(new_values[7] > 0 && new_values[7] <= doubles[i]) {
+                    doubles_results[7] = double_types[i];
+                    new_values[7] = 0;
+                    doubles[i] -= 4;
+                }
+                if(new_values[2] > 0 && new_values[2] <= doubles[i]) {
+                    doubles_results[2] = double_types[i];
+                    new_values[2] = 0;
+                    doubles[i] -= 3;
+                }
+                if(new_values[8] > 0 && new_values[8] <= doubles[i]) {
+                    doubles_results[8] = double_types[i];
+                    new_values[8] = 0;
+                    doubles[i] -= 3;
+                }
+                if(new_values[1] > 0 && new_values[1] <= doubles[i]) {
+                    doubles_results[1] = double_types[i];
+                    new_values[1] = 0;
+                    doubles[i] -= 2;
+                }
+                if(new_values[9] > 0 && new_values[9] <= doubles[i]) {
+                    doubles_results[9] = double_types[i];
+                    new_values[9] = 0;
+                    doubles[i] -= 2;
+                }
+                if(new_values[0] > 0 && new_values[0] <= doubles[i]) {
+                    doubles_results[0] = double_types[i];
+                    new_values[0] = 0;
+                    doubles[i] -= 1;
+                }
+                if(new_values[10] > 0 && new_values[10] <= doubles[i]) {
+                    doubles_results[10] = double_types[i];
+                    new_values[10] = 0;
+                    doubles[i] -= 1;
+                }
+            }
+        }
+
+        // create out results
+        let o_total = stats.hbp + stats.g1 + stats.g2 + stats.pop + stats.lo + stats.g3 + stats.g4 + stats.g5 + stats.g6 + stats.f7 + stats.f9 + stats.f8;
+        let o_hbp = Math.round((stats.hbp / o_total) * 108);
+        let o_g1 = Math.round((stats.g1 / o_total) * 108);
+        let o_g2 = Math.round((stats.g2 / o_total) * 108);
+        let o_pop = Math.round((stats.pop / o_total) * 108);
+        let o_lo = Math.round((stats.lo / o_total) * 108);
+        let o_g3 = Math.round((stats.g3 / o_total) * 108);
+        let o_g4 = Math.round((stats.g4 / o_total) * 108);
+        let o_g5 = Math.round((stats.g5 / o_total) * 108);
+        let o_g6 = Math.round((stats.g6 / o_total) * 108);
+        let o_f7 = Math.round((stats.f7 / o_total) * 108);
+        let o_f9 = Math.round((stats.f9 / o_total) * 108);
+        let o_f8 = 108 - o_hbp - o_g1 - o_g2 - o_pop - o_lo - o_g3 - o_g4 - o_g5 - o_g6 - o_f7 - o_f9;
+
+        outs = [o_hbp, o_g1, o_g2, o_pop, o_lo, o_g3, o_g4, o_g5, o_g6, o_f7, o_f9, o_f8];
+
+        let new_values_1 = [...range_values];
+        let new_values_2 = [...range_values];
+        let new_values_3 = [...range_values];
+
+        for(let i = 0; i < 12; i++) {
+            // Check Column A
+            if(outs[i] > 0) {
+                if(new_values_1[5] > 0 && new_values_1[5] <= outs[i]) {
+                    out_results_1[5] = out_types[i];
+                    new_values_1[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_1[4] > 0 && new_values_1[4] <= outs[i]) {
+                    out_results_1[4] = out_types[i];
+                    new_values_1[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_1[6] > 0 && new_values_1[6] <= outs[i]) {
+                    out_results_1[6] = out_types[i];
+                    new_values_1[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_1[3] > 0 && new_values_1[3] <= outs[i]) {
+                    out_results_1[3] = out_types[i];
+                    new_values_1[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_1[7] > 0 && new_values_1[7] <= outs[i]) {
+                    out_results_1[7] = out_types[i];
+                    new_values_1[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_1[2] > 0 && new_values_1[2] <= outs[i]) {
+                    out_results_1[2] = out_types[i];
+                    new_values_1[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_1[8] > 0 && new_values_1[8] <= outs[i]) {
+                    out_results_1[8] = out_types[i];
+                    new_values_1[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_1[1] > 0 && new_values_1[1] <= outs[i]) {
+                    out_results_1[1] = out_types[i];
+                    new_values_1[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_1[9] > 0 && new_values_1[9] <= outs[i]) {
+                    out_results_1[9] = out_types[i];
+                    new_values_1[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_1[0] > 0 && new_values_1[0] <= outs[i]) {
+                    out_results_1[0] = out_types[i];
+                    new_values_1[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_1[10] > 0 && new_values_1[10] <= outs[i]) {
+                    out_results_1[10] = out_types[i];
+                    new_values_1[10] = 0;
+                    outs[i] -= 1;
+                }
+            }
+            // Check Column B
+            if(outs[i] > 0) {
+                if(new_values_2[5] > 0 && new_values_2[5] <= outs[i]) {
+                    out_results_2[5] = out_types[i];
+                    new_values_2[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_2[4] > 0 && new_values_2[4] <= outs[i]) {
+                    out_results_2[4] = out_types[i];
+                    new_values_2[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_2[6] > 0 && new_values_2[6] <= outs[i]) {
+                    out_results_2[6] = out_types[i];
+                    new_values_2[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_2[3] > 0 && new_values_2[3] <= outs[i]) {
+                    out_results_2[3] = out_types[i];
+                    new_values_2[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_2[7] > 0 && new_values_2[7] <= outs[i]) {
+                    out_results_2[7] = out_types[i];
+                    new_values_2[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_2[2] > 0 && new_values_2[2] <= outs[i]) {
+                    out_results_2[2] = out_types[i];
+                    new_values_2[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_2[8] > 0 && new_values_2[8] <= outs[i]) {
+                    out_results_2[8] = out_types[i];
+                    new_values_2[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_2[1] > 0 && new_values_2[1] <= outs[i]) {
+                    out_results_2[1] = out_types[i];
+                    new_values_2[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_2[9] > 0 && new_values_2[9] <= outs[i]) {
+                    out_results_2[9] = out_types[i];
+                    new_values_2[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_2[0] > 0 && new_values_2[0] <= outs[i]) {
+                    out_results_2[0] = out_types[i];
+                    new_values_2[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_2[10] > 0 && new_values_2[10] <= outs[i]) {
+                    out_results_2[10] = out_types[i];
+                    new_values_2[10] = 0;
+                    outs[i] -= 1;
+                }
+            }
+
+            // Check Column C
+            if(outs[i] > 0) {
+                if(new_values_3[5] > 0 && new_values_3[5] <= outs[i]) {
+                    out_results_3[5] = out_types[i];
+                    new_values_3[5] = 0;
+                    outs[i] -= 6;
+                }
+                if(new_values_3[4] > 0 && new_values_3[4] <= outs[i]) {
+                    out_results_3[4] = out_types[i];
+                    new_values_3[4] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_3[6] > 0 && new_values_3[6] <= outs[i]) {
+                    out_results_3[6] = out_types[i];
+                    new_values_3[6] = 0;
+                    outs[i] -= 5;
+                }
+                if(new_values_3[3] > 0 && new_values_3[3] <= outs[i]) {
+                    out_results_3[3] = out_types[i];
+                    new_values_3[3] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_3[7] > 0 && new_values_3[7] <= outs[i]) {
+                    out_results_3[7] = out_types[i];
+                    new_values_3[7] = 0;
+                    outs[i] -= 4;
+                }
+                if(new_values_3[2] > 0 && new_values_3[2] <= outs[i]) {
+                    out_results_3[2] = out_types[i];
+                    new_values_3[2] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_3[8] > 0 && new_values_3[8] <= outs[i]) {
+                    out_results_3[8] = out_types[i];
+                    new_values_3[8] = 0;
+                    outs[i] -= 3;
+                }
+                if(new_values_3[1] > 0 && new_values_3[1] <= outs[i]) {
+                    out_results_3[1] = out_types[i];
+                    new_values_3[1] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_3[9] > 0 && new_values_3[9] <= outs[i]) {
+                    out_results_3[9] = out_types[i];
+                    new_values_3[9] = 0;
+                    outs[i] -= 2;
+                }
+                if(new_values_3[0] > 0 && new_values_3[0] <= outs[i]) {
+                    out_results_3[0] = out_types[i];
+                    new_values_3[0] = 0;
+                    outs[i] -= 1;
+                }
+                if(new_values_3[10] > 0 && new_values_3[10] <= outs[i]) {
+                    out_results_3[10] = out_types[i];
+                    new_values_3[10] = 0;
+                    outs[i] -= 1;
+                }
+            }
+        }
     }
 
     logit();
