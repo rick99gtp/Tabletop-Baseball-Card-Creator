@@ -88,8 +88,8 @@ btn.addEventListener('click', () => {
 
     if(batterOrPitcher === 'Pitcher') {
         findPitcherGames();
-        readArray();
-        //getPitcherStats(game);
+        // readArray();
+        getPitcherStats();
     }
     else {
         getBatterStats();
@@ -106,178 +106,198 @@ btn.addEventListener('click', () => {
         for(let i = 0, max = playByPlayObj.length; i < max; i++) {
             if(playByPlayObj[i].start_player_id === searchForPlayerByID) {
                 if(playByPlayObj[i].category === "start" || playByPlayObj[i].category === "sub") {
-                    if(playByPlayObj[i].play_player_id === 1) {
-                        pitcherInning = playByPlayObj[i].play_player_id;
-                        pitcherGames.push({
-                            inning: pitcherInning,
-                            record: i
-                        });
-                    }
+                    pitcherInning = playByPlayObj[i].play_player_id;
+                    pitcherGames.push({
+                        inning: pitcherInning,
+                        record: i + 1
+                    });
                 }
             }
         }
     }
 
-    function getPitcherStats(num) {
-        // num = array index
-        for(let i = num, max = playByPlayObj.length; i < max; i++) {
-            if(playByPlayObj[i].category === "play") {
-                if(playByPlayObj[i].player_name !== pitcherInning) {
-                    // this is the inning the pitcher pitches, they should not equal each other
-                    // get result
-                    if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "CS" &&  playByPlayObj[i].play_result.substring(0,2) !== "PO" &&  playByPlayObj[i].play_result.substring(0,2) !== "DI" &&  playByPlayObj[i].play_result.substring(0,4) !== "C/E2" &&  playByPlayObj[i].play_result.substring(0,2) !== "PB" && playByPlayObj[i].play_result.substring(0,2) !== "OA" && playByPlayObj[i].play_result.substring(0,4) !== "POCS" && playByPlayObj[i].play_result.substring(0,4) !== "FLE" && playByPlayObj[i].play_result.substring(0,4) !== "C/E3") {
-                        // add PA
-                        stats.pa++;
-                        count++;
-                        console.log(count + ": " + playByPlayObj[i].play_result);
-    
-                        if(playByPlayObj[i].play_result.charAt(0) === "K") {
-                            stats.k++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "WP") {
-                            stats.wp++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "BK") {
-                            stats.bk++;
-                        }
-                        else if(playByPlayObj[i].play_result.charAt(0) === "W" || playByPlayObj[i].play_result.substring(0,2) === "IW") {
-                            stats.bb++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "S9") {
-                            stats.b1_rf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "S8") {
-                            stats.b1_cf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "S7") {
-                            stats.b1_lf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "S1" || playByPlayObj[i].play_result.substring(0,2) === "S2" || playByPlayObj[i].play_result.substring(0,2) === "S3" || playByPlayObj[i].play_result.substring(0,2) === "S4" || playByPlayObj[i].play_result.substring(0,2) === "S5" || playByPlayObj[i].play_result.substring(0,2) === "S6") {
-                            stats.b1_if++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "D9") {
-                            stats.b2_rf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "D/L") {
-                            stats.b2_cf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
-                            stats.b2_lf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "DGR") {
-                            stats.b2_dgr++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "T9") {
-                            stats.b3_rf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "T8") {
-                            stats.b3_cf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "T7") {
-                            stats.b3_lf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/9") {
-                            stats.hr_rf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8" || playByPlayObj[i].play_result.substring(0,5) === "HR8/8") {
-                            stats.hr_cf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,4) === "HR/7") {
-                            stats.hr_lf++;
-                            stats.h++;
-                            stats.ab++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,2) === "HP") {
-                            stats.hbp++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/G" || playByPlayObj[i].play_result.substring(0,2) === "12" || playByPlayObj[i].play_result.substring(0,2) === "13" || playByPlayObj[i].play_result.substring(0,2) === "E1" || playByPlayObj[i].play_result.substring(0,5) === "FC1/G" || playByPlayObj[i].play_result.substring(0,2) === "14" || playByPlayObj[i].play_result.substring(0,2) === "16" || playByPlayObj[i].play_result.substring(0,4) === "1(B)") {
-                            stats.g1++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "2/G" || playByPlayObj[i].play_result.substring(0,2) === "23" || playByPlayObj[i].play_result.substring(0,2) === "E2" || playByPlayObj[i].play_result.substring(0,5) === "FC2/G") {
-                            stats.g2++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "3/G" || playByPlayObj[i].play_result.substring(0,2) === "E3" || playByPlayObj[i].play_result.substring(0,3) === "FC3" || playByPlayObj[i].play_result.substring(0,2) === "31"  || playByPlayObj[i].play_result.substring(0,2) === "36" || playByPlayObj[i].play_result.substring(0,2) === "32" || playByPlayObj[i].play_result.substring(0,4) === "3(B)") {
-                            stats.g3++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "4/G" || playByPlayObj[i].play_result.substring(0,2) === "43" || playByPlayObj[i].play_result.substring(0,2) === "45" || playByPlayObj[i].play_result.substring(0,2) === "E4" || playByPlayObj[i].play_result.substring(0,3) === "FC4" || playByPlayObj[i].play_result.substring(0,4) === "4(1)" || playByPlayObj[i].play_result.substring(0,2) === "46" || playByPlayObj[i].play_result.substring(0,2) === "41" || playByPlayObj[i].play_result.substring(0,4) === "4(B)") {
-                            stats.g4++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "5/G" || playByPlayObj[i].play_result.substring(0,2) === "53" || playByPlayObj[i].play_result.substring(0,2) === "54" || playByPlayObj[i].play_result.substring(0,2) === "E5" || playByPlayObj[i].play_result.substring(0,3) === "FC5" || playByPlayObj[i].play_result.substring(0,4) === "5(2)" || playByPlayObj[i].play_result.substring(0,2) === "56" || playByPlayObj[i].play_result.substring(0,2) === "52" || playByPlayObj[i].play_result.substring(0,4) === "5(B)") {
-                            stats.g5++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "6/G" || playByPlayObj[i].play_result.substring(0,2) === "63" || playByPlayObj[i].play_result.substring(0,2) === "64" || playByPlayObj[i].play_result.substring(0,2) === "65" || playByPlayObj[i].play_result.substring(0,2) === "E6" || playByPlayObj[i].play_result.substring(0,3) === "FC6" || playByPlayObj[i].play_result.substring(0,4) === "6(1)" || playByPlayObj[i].play_result.substring(0,4) === "6(B)") {
-                            stats.g6++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
-                            stats.f7++;
-                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                                stats.sf_lf++;
+    function getPitcherStats() {
+        for(let j = 0, max = pitcherGames.length; j < max; j++) {
+            for(let i = pitcherGames[j].record, iMax = playByPlayObj.length; i < iMax; i++) {
+                if(playByPlayObj[i].category === "play") {
+                    if(playByPlayObj[i].player_name !== pitcherGames[j].inning) {
+                        // this is the inning the pitcher pitches, they should not equal each other
+                        // get result
+                        if(playByPlayObj[i].play_result !== "NP" && playByPlayObj[i].play_result.substring(0,2) !== "SB" && playByPlayObj[i].play_result.substring(0,2) !== "CS" &&  playByPlayObj[i].play_result.substring(0,2) !== "PO" &&  playByPlayObj[i].play_result.substring(0,2) !== "DI" &&  playByPlayObj[i].play_result.substring(0,4) !== "C/E2" &&  playByPlayObj[i].play_result.substring(0,2) !== "PB" && playByPlayObj[i].play_result.substring(0,2) !== "OA" && playByPlayObj[i].play_result.substring(0,4) !== "POCS" && playByPlayObj[i].play_result.substring(0,4) !== "FLE" && playByPlayObj[i].play_result.substring(0,4) !== "C/E3") {
+                            // add PA
+                            stats.pa++;
+                            count++;
+                            console.log(count + ": " + playByPlayObj[i].play_result);
+        
+                            if(playByPlayObj[i].play_result.charAt(0) === "K") {
+                                stats.k++;
+                                stats.ab++;
                             }
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
-                            stats.f8++;
-                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                                stats.sf_cf++;
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "WP") {
+                                stats.wp++;
+                                stats.pa--;
                             }
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
-                            stats.f9++;
-                            if(playByPlayObj[i].play_result.search('/SF') > 0) {
-                                stats.sf_rf++;
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "BK") {
+                                stats.bk++;
+                                stats.bk--;
                             }
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
-                            stats.pop++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
-                            stats.lo++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
-                            stats.lo++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
-                            stats.lo++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
-                            stats.lo++;
-                        }
-                        else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
-                            stats.lo++;
+                            else if(playByPlayObj[i].play_result.charAt(0) === "W" || playByPlayObj[i].play_result.substring(0,2) === "IW") {
+                                stats.bb++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "S9") {
+                                stats.b1_rf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "S8") {
+                                stats.b1_cf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "S7") {
+                                stats.b1_lf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "S1" || playByPlayObj[i].play_result.substring(0,2) === "S2" || playByPlayObj[i].play_result.substring(0,2) === "S3" || playByPlayObj[i].play_result.substring(0,2) === "S4" || playByPlayObj[i].play_result.substring(0,2) === "S5" || playByPlayObj[i].play_result.substring(0,2) === "S6") {
+                                stats.b1_if++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "D9") {
+                                stats.b2_rf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "D8" || playByPlayObj[i].play_result.substring(0,3) === "D/L") {
+                                stats.b2_cf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "D7" || playByPlayObj[i].play_result.substring(0,2) === "D6" || playByPlayObj[i].play_result.substring(0,2) === "D5") {
+                                stats.b2_lf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "DGR") {
+                                stats.b2_dgr++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "T9") {
+                                stats.b3_rf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "T8") {
+                                stats.b3_cf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "T7") {
+                                stats.b3_lf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,4) === "HR/9") {
+                                stats.hr_rf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,4) === "HR/8" || playByPlayObj[i].play_result.substring(0,5) === "HR8/8") {
+                                stats.hr_cf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,4) === "HR/7") {
+                                stats.hr_lf++;
+                                stats.h++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,2) === "HP") {
+                                stats.hbp++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "1/G" || playByPlayObj[i].play_result.substring(0,2) === "12" || playByPlayObj[i].play_result.substring(0,2) === "13" || playByPlayObj[i].play_result.substring(0,2) === "E1" || playByPlayObj[i].play_result.substring(0,5) === "FC1/G" || playByPlayObj[i].play_result.substring(0,2) === "14" || playByPlayObj[i].play_result.substring(0,2) === "16" || playByPlayObj[i].play_result.substring(0,4) === "1(B)") {
+                                stats.g1++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "2/G" || playByPlayObj[i].play_result.substring(0,2) === "23" || playByPlayObj[i].play_result.substring(0,2) === "E2" || playByPlayObj[i].play_result.substring(0,5) === "FC2/G") {
+                                stats.g2++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "3/G" || playByPlayObj[i].play_result.substring(0,2) === "E3" || playByPlayObj[i].play_result.substring(0,3) === "FC3" || playByPlayObj[i].play_result.substring(0,2) === "31"  || playByPlayObj[i].play_result.substring(0,2) === "36" || playByPlayObj[i].play_result.substring(0,2) === "32" || playByPlayObj[i].play_result.substring(0,4) === "3(B)") {
+                                stats.g3++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "4/G" || playByPlayObj[i].play_result.substring(0,2) === "43" || playByPlayObj[i].play_result.substring(0,2) === "45" || playByPlayObj[i].play_result.substring(0,2) === "E4" || playByPlayObj[i].play_result.substring(0,3) === "FC4" || playByPlayObj[i].play_result.substring(0,4) === "4(1)" || playByPlayObj[i].play_result.substring(0,2) === "46" || playByPlayObj[i].play_result.substring(0,2) === "41" || playByPlayObj[i].play_result.substring(0,4) === "4(B)") {
+                                stats.g4++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "5/G" || playByPlayObj[i].play_result.substring(0,2) === "53" || playByPlayObj[i].play_result.substring(0,2) === "54" || playByPlayObj[i].play_result.substring(0,2) === "E5" || playByPlayObj[i].play_result.substring(0,3) === "FC5" || playByPlayObj[i].play_result.substring(0,4) === "5(2)" || playByPlayObj[i].play_result.substring(0,2) === "56" || playByPlayObj[i].play_result.substring(0,2) === "52" || playByPlayObj[i].play_result.substring(0,4) === "5(B)") {
+                                stats.g5++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "6/G" || playByPlayObj[i].play_result.substring(0,2) === "63" || playByPlayObj[i].play_result.substring(0,2) === "64" || playByPlayObj[i].play_result.substring(0,2) === "65" || playByPlayObj[i].play_result.substring(0,2) === "E6" || playByPlayObj[i].play_result.substring(0,3) === "FC6" || playByPlayObj[i].play_result.substring(0,4) === "6(1)" || playByPlayObj[i].play_result.substring(0,4) === "6(B)") {
+                                stats.g6++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "7/F" || playByPlayObj[i].play_result.substring(0,3) === "7/L" || playByPlayObj[i].play_result.substring(0,2) === "E7" || playByPlayObj[i].play_result.substring(0,4) === "7(B)") {
+                                stats.f7++;
+                                stats.ab++;
+                                if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                    stats.sf_lf++;
+                                }
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "8/F" || playByPlayObj[i].play_result.substring(0,3) === "8/L" || playByPlayObj[i].play_result.substring(0,2) === "E8" || playByPlayObj[i].play_result.substring(0,4) === "8(B)") {
+                                stats.f8++;
+                                stats.ab++;
+                                if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                    stats.sf_cf++;
+                                }
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "9/F" || playByPlayObj[i].play_result.substring(0,3) === "9/L" || playByPlayObj[i].play_result.substring(0,2) === "E9" || playByPlayObj[i].play_result.substring(0,4) === "9(B)") {
+                                stats.f9++;
+                                stats.ab++;
+                                if(playByPlayObj[i].play_result.search('/SF') > 0) {
+                                    stats.sf_rf++;
+                                }
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "1/P" || playByPlayObj[i].play_result.substring(0,3) === "2/P" || playByPlayObj[i].play_result.substring(0,3) === "3/P" || playByPlayObj[i].play_result.substring(0,3) === "4/P" || playByPlayObj[i].play_result.substring(0,3) === "5/P" || playByPlayObj[i].play_result.substring(0,3) === "6/P") {
+                                stats.pop++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
+                                stats.lo++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
+                                stats.lo++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
+                                stats.lo++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
+                                stats.lo++;
+                                stats.ab++;
+                            }
+                            else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
+                                stats.lo++;
+                                stats.ab++;
+                            }
                         }
                     }
                 }
-            }
-            else if(playByPlayObj[i].category === 'sub') {
-                if(playByPlayObj[i].play_player_id === pitcherInning) {
-                    // current pitcher has been taken out of the game
-                    
+                else if(playByPlayObj[i].category === "sub"){
+                    if(playByPlayObj[i].play_player_id === pitcherGames[j].inning) {
+                        // stop gathering stats
+                        i = iMax;
+                    }
+                }
+                else if(playByPlayObj[i].category === "data") {
+                    // stop gathering stats
+                    i = iMax;
                 }
             }
         }
