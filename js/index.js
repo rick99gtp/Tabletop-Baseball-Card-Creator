@@ -1135,6 +1135,17 @@ function getPlayerNames() {
                 players.push(thisPlayer);
             }
         }
+        else if(playByPlayObj[i].category === "sub") {
+            if(!names.includes(playByPlayObj[i].player_name)) {
+                let playerName = playByPlayObj[i].player_name;
+                let playerId = playByPlayObj[i].start_player_id;
+    
+                let thisPlayer = {playerName, playerId};
+
+                names.push(playByPlayObj[i].player_name);
+                players.push(thisPlayer);
+            }
+        }
     }
 
     players.sort(compare);
