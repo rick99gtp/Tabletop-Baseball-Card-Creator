@@ -56,6 +56,7 @@ let double_types = ["LF", "CF", "RF", "GR"];
 let out_types = ["HBP", "G1", "G2", "G3", "G4", "G5", "G6", "LO", "F7", "F9", "F8", "POP"];
 let out_types_gb = ["G1", "G2", "G3", "G4", "G5", "G6"];
 let out_types_fb = ["F7", "F9", "F8"];
+let out_types_other = ["HBP", "LO", "POP"];
 let range_values = [1,2,3,4,5,6,5,4,3,2,1];
 let singles_results = ["", "", "", "", "", "", "", "", "", "", ""];
 let doubles_results = ['', '', '', '', '', '', '', '', '', '', ''];
@@ -857,6 +858,12 @@ btn.addEventListener('click', () => {
 
         let outs_fb = [fb_7, fb_9];
 
+        let other_total = stats.pop + stats.lo + stats.hbp;
+        let hbp_num = Math.round((stats.hbp / other_total) * 36);
+        let lo_num = Math.round((stats.lo / other_total) * 36);
+
+        let outs_other = [hbp_num, lo_num];
+
         console.log("outs:" + outs);
 
         let new_values_1 = [...range_values];
@@ -1088,7 +1095,7 @@ btn.addEventListener('click', () => {
         // ************ METHOD TWO ***********
         // get Column A first (GB)
         for(let i = 0, max=outs_gb.length; i < max; i++) {
-            if(outs[i] > 0) {
+            if(outs_gb[i] > 0) {
                 // Column A
 
                 if(new_values_1[5] > 0 && (outs_gb[i] >= new_values_1[5])) {
@@ -1161,7 +1168,7 @@ btn.addEventListener('click', () => {
 
         // get Column B next (FB)
         for(let i = 0, max=outs_fb.length; i < max; i++) {
-            if(outs[i] > 0) {
+            if(outs_fb[i] > 0) {
 
                 if(new_values_2[5] > 0 && (outs_fb[i] >= new_values_2[5])) {
                     out_results_2[5] = out_types_fb[i];
@@ -1235,6 +1242,85 @@ btn.addEventListener('click', () => {
         for(let i=0; i < 11; i++) {
             if(new_values_2[i] > 0) {
                 out_results_2[i] = 'F8';
+            }
+        }
+
+        // get Column C next (HBP, LO, and POP)
+        for(let i = 0, max=outs_other.length; i < max; i++) {
+            if(outs_other[i] > 0) {
+
+                if(new_values_3[5] > 0 && (outs_other[i] >= new_values_3[5])) {
+                    out_results_3[5] = out_types_other[i];
+                    new_values_3[5] = 0;
+                    outs_other[i] -= 6;
+                }
+
+                if(new_values_3[4] > 0 && (outs_other[i] >= new_values_3[4])) {
+                    out_results_3[4] = out_types_other[i];
+                    new_values_3[4] = 0;
+                    outs_other[i] -= 5;
+                }
+
+                if(new_values_3[6] > 0 && (outs_other[i] >= new_values_3[6])) {
+                    out_results_3[6] = out_types_other[i];
+                    new_values_3[6] = 0;
+                    outs_other[i] -= 5;
+                }
+
+                if(new_values_3[3] > 0 && (outs_other[i] >= new_values_3[3])) {
+                    out_results_3[3] = out_types_other[i];
+                    new_values_3[3] = 0;
+                    outs_other[i] -= 4;
+                }
+
+                if(new_values_3[7] > 0 && (outs_other[i] >= new_values_3[7])) {
+                    out_results_3[7] = out_types_other[i];
+                    new_values_3[7] = 0;
+                    outs_other[i] -= 4;
+                }
+
+                if(new_values_3[2] > 0 && (outs_other[i] >= new_values_3[2])) {
+                    out_results_3[2] = out_types_other[i];
+                    new_values_3[2] = 0;
+                    outs_other[i] -= 3;
+                }
+
+                if(new_values_3[8] > 0 && (outs_other[i] >= new_values_3[8])) {
+                    out_results_3[8] = out_types_other[i];
+                    new_values_3[8] = 0;
+                    outs_other[i] -= 3;
+                }
+
+                if(new_values_3[1] > 0 && (outs_other[i] >= new_values_3[1])) {
+                    out_results_3[1] = out_types_other[i];
+                    new_values_3[1] = 0;
+                    outs_other[i] -= 2;
+                }
+
+                if(new_values_3[9] > 0 && (outs_other[i] >= new_values_3[9])) {
+                    out_results_3[9] = out_types_other[i];
+                    new_values_3[9] = 0;
+                    outs_other[i] -= 2;
+                }
+
+                if(new_values_3[0] > 0 && (outs_other[i] >= new_values_3[0])) {
+                    out_results_3[0] = out_types_other[i];
+                    new_values_3[0] = 0;
+                    outs_other[i] -= 1;
+                }
+
+                if(new_values_3[10] > 0 && (outs_other[i] >= new_values_3[10])) {
+                    out_results_3[10] = out_types_other[i];
+                    new_values_3[10] = 0;
+                    outs_other[i] -= 1;
+                }
+            }
+
+            // fill the rest with 'POP'
+            for(let i=0; i < 11; i++) {
+                if(new_values_3[i] > 0) {
+                    out_results_3[i] = 'POP';
+                }
             }
         }
 
