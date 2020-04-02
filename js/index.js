@@ -55,8 +55,8 @@ let single_types = ["LF", "CF", "RF", "IF"];
 let double_types = ["LF", "CF", "RF", "GR"];
 let out_types = ["HBP", "G1", "G2", "G3", "G4", "G5", "G6", "LO", "F7", "F9", "F8", "POP"];
 let out_types_gb = ["G1", "G2", "G3", "G4", "G5", "G6"];
-let out_types_fb = ["F7", "F9", "F8"];
-let out_types_other = ["HBP", "LO", "POP"];
+let out_types_fb = ["F7", "F9", "F8", "POP"];
+let out_types_other = ["HBP", "L1", "L3", "L4", "L5", "L6"];
 let range_values = [1,2,3,4,5,6,5,4,3,2,1];
 let singles_results = ["", "", "", "", "", "", "", "", "", "", ""];
 let doubles_results = ['', '', '', '', '', '', '', '', '', '', ''];
@@ -662,18 +662,23 @@ btn.addEventListener('click', () => {
                             stats.pop++;
                         }
                         else if(playByPlayObj[i].play_result.substring(0,3) === "1/L") {
+                            stats.l1++;
                             stats.lo++;
                         }
                         else if(playByPlayObj[i].play_result.substring(0,3) === "3/L") {
+                            stats.l3++;
                             stats.lo++;
                         }
                         else if(playByPlayObj[i].play_result.substring(0,3) === "4/L") {
+                            stats.l4++;
                             stats.lo++;
                         }
                         else if(playByPlayObj[i].play_result.substring(0,3) === "5/L") {
+                            stats.l5++;
                             stats.lo++;
                         }
                         else if(playByPlayObj[i].play_result.substring(0,3) === "6/L") {
+                            stats.l6++;
                             stats.lo++;
                         }
                     }
@@ -826,21 +831,6 @@ btn.addEventListener('click', () => {
         }
 
         // create out results
-        let o_total = stats.hbp + stats.g1 + stats.g2 + stats.g3 + stats.g4 + stats.g5 + stats.g6 + stats.f7 + stats.f9 + stats.f8 + stats.pop + stats.lo;
-        let o_hbp = Math.round((stats.hbp / o_total) * 108);
-        let o_g1 = Math.round((stats.g1 / o_total) * 108);
-        let o_g2 = Math.round((stats.g2 / o_total) * 108);
-        let o_g3 = Math.round((stats.g3 / o_total) * 108);
-        let o_g4 = Math.round((stats.g4 / o_total) * 108);
-        let o_g5 = Math.round((stats.g5 / o_total) * 108);
-        let o_g6 = Math.round((stats.g6 / o_total) * 108);
-        let o_f7 = Math.round((stats.f7 / o_total) * 108);
-        let o_f9 = Math.round((stats.f9 / o_total) * 108);
-        let o_pop = Math.round((stats.pop / o_total) * 108);
-        let o_lo = Math.round((stats.lo / o_total) * 108)
-        let o_f8 = 108 - o_hbp - o_g1 - o_g2 - o_pop - o_lo - o_g3 - o_g4 - o_g5 - o_g6 - o_f7 - o_f9;
-
-        outs = [o_hbp, o_g1, o_g2, o_g3, o_g4, o_g5, o_g6, o_lo, o_f7, o_f9, o_f8, o_pop];
 
         let gb_total = stats.g1 + stats.g2 + stats.g3 + stats.g4 + stats.g5 + stats.g6;
         let gb_1 = Math.round((stats.g1 / gb_total) * 36);
@@ -852,19 +842,21 @@ btn.addEventListener('click', () => {
         
         let outs_gb = [gb_1, gb_2, gb_3, gb_4, gb_5, gb_6];
 
-        let fb_total = stats.f7 + stats.f8 + stats.f9;
+        let fb_total = stats.f7 + stats.f8 + stats.f9 + stats.pop;
         let fb_7 = Math.round((stats.f7 / fb_total) * 36);
         let fb_9 = Math.round((stats.f9 / fb_total) * 36);
+        let fb_8 = Math.round((stats.f8 / fb_total) * 36);
 
-        let outs_fb = [fb_7, fb_9];
+        let outs_fb = [fb_7, fb_9, fb_8];
 
-        let other_total = stats.pop + stats.lo + stats.hbp;
+        let other_total = stats.l1 + stats.l3 + stats.l4 + stats.l5 + stats.l6 + stats.hbp;
         let hbp_num = Math.round((stats.hbp / other_total) * 36);
-        let lo_num = Math.round((stats.lo / other_total) * 36);
+        let lo_1 = Math.round((stats.l1 / other_total) * 36);
+        let lo_3 = Math.round((stats.l3 / other_total) * 36);
+        let lo_4 = Math.round((stats.l4 / other_total) * 36);
+        let lo_5 = Math.round((stats.l5 / other_total) * 36);
 
-        let outs_other = [hbp_num, lo_num];
-
-        console.log("outs:" + outs);
+        let outs_other = [hbp_num, lo_1, lo_3, lo_4, lo_5];
 
         let new_values_1 = [...range_values];
         let new_values_2 = [...range_values];
@@ -1238,14 +1230,14 @@ btn.addEventListener('click', () => {
             }
         }
 
-        // fill the rest with 'F8'
+        // fill the rest with 'POP'
         for(let i=0; i < 11; i++) {
             if(new_values_2[i] > 0) {
-                out_results_2[i] = 'F8';
+                out_results_2[i] = 'POP';
             }
         }
 
-        // get Column C next (HBP, LO, and POP)
+        // get Column C next (HBP, L1, L3, L4, L5, L6)
         for(let i = 0, max=outs_other.length; i < max; i++) {
             if(outs_other[i] > 0) {
 
@@ -1316,10 +1308,10 @@ btn.addEventListener('click', () => {
                 }
             }
 
-            // fill the rest with 'POP'
+            // fill the rest with 'L6'
             for(let i=0; i < 11; i++) {
                 if(new_values_3[i] > 0) {
-                    out_results_3[i] = 'POP';
+                    out_results_3[i] = 'L6';
                 }
             }
         }
